@@ -12,5 +12,45 @@
  * @author CETECOM
  */
 class SolicitudDto {
-    //put your code here
+    
+    private $idSolicitud;
+    private $idPostulante;
+    private $idEstado;
+    private $fechaRegistro;
+
+    function getIdSolicitud() {
+        return $this->idSolicitud;
+    }
+
+    function getIdPostulante() {
+        return $this->idPostulante;
+    }
+
+    function getIdEstado() {
+        return $this->idEstado;
+    }
+
+    function getFechaRegistro() {
+        return $this->fechaRegistro;
+    }
+
+    function setIdSolicitud($idSolicitud) {
+        $this->idSolicitud = $idSolicitud;
+    }
+
+    function setIdPostulante($idPostulante) {
+        $this->idPostulante = $idPostulante;
+    }
+
+    function setIdEstado($idEstado) {
+        $this->idEstado = $idEstado;
+    }
+
+    function setFechaRegistro($fechaRegistro) {
+        $this->fechaRegistro = $fechaRegistro;
+    }
+
+
+    
+    
 }

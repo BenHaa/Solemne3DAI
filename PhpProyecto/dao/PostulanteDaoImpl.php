@@ -7,10 +7,10 @@
  */
 
 /**
- * Description of DetalleSolicitudDto
+ * Description of PostulanteDaoImpl
  *
  * @author CETECOM
  */
-class DetalleSolicitudDto {
+class PostulanteDaoImpl {
     //put your code here
 }

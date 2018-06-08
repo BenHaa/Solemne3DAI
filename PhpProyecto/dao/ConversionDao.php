@@ -7,10 +7,12 @@
  */
 
 /**
- * Description of TipoRentaDto
  *
  * @author CETECOM
  */
-class TipoRentaDto {
-    //put your code here
+interface ConversionDao {
+
+    public static function StringToInt($string);
+
+    public static function IntToString($int);
 }

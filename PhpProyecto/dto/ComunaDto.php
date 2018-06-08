@@ -12,5 +12,29 @@
  * @author CETECOM
  */
 class ComunaDto {
-    //put your code here
+
+    private $idComuna;
+    private $descripcion;
+
+    
+    function getIdComuna() {
+        return $this->idComuna;
+    }
+
+    function getDescripcion() {
+        return $this->descripcion;
+    }
+
+    function setIdComuna($idComuna) {
+        $this->idComuna = $idComuna;
+    }
+
+    function setDescripcion($descripcion) {
+        $this->descripcion = $descripcion;
+    }
+
+
+    
+    
+    
 }

@@ -11,6 +11,30 @@
  *
  * @author CETECOM
  */
-class PostulanteDaoImpl {
+class PostulanteDaoImpl implements BaseDao, ConversionDao{
     //put your code here
+    
+    public static function agregarObjeto($dto) {
+        
+    }
+    public static function ActulizarObjeto($id) {
+        
+    }
+
+    public static function EliminarObjeto($id) {
+        
+    }
+
+    public static function LeerObjeto($id) {
+        
+    }
+
+    public static function IntToString($int) {
+        
+    }
+
+    public static function StringToInt($string) {
+        
+    }
+
 }

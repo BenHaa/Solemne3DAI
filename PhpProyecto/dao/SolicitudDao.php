@@ -11,14 +11,12 @@
  *
  * @author CETECOM
  */
-
 include_once 'BaseDao.php';
 include_once 'ConversionDao.php';
 
-
 abstract class SolicitudDao implements BaseDao, ConversionDao {
 
-    public static function listarSolicitudes();
-    
-    
+    public abstract static function listarSolicitudes();
+
+    public abstract static function NombrePorId($id);
 }

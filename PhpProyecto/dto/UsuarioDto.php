@@ -14,18 +14,20 @@
 class UsuarioDto {
 
     private $idUsuario;
-    private $nombreUsuario;
     private $contrasena;
     private $idPerfil;
+    private $rut;
 
-    
-    
-    function getIdUsuario() {
-        return $this->idUsuario;
+    function getRut() {
+        return $this->rut;
     }
 
-    function getNombreUsuario() {
-        return $this->nombreUsuario;
+    function setRut($rut) {
+        $this->rut = $rut;
+    }
+
+    function getIdUsuario() {
+        return $this->idUsuario;
     }
 
     function getContrasena() {
@@ -40,10 +42,6 @@ class UsuarioDto {
         $this->idUsuario = $idUsuario;
     }
 
-    function setNombreUsuario($nombreUsuario) {
-        $this->nombreUsuario = $nombreUsuario;
-    }
-
     function setContrasena($contrasena) {
         $this->contrasena = $contrasena;
     }
@@ -52,8 +50,9 @@ class UsuarioDto {
         $this->idPerfil = $idPerfil;
     }
 
+    public function __toString() {
+        return "idUsuario : " . $this->idUsuario . " Id Perfil: " . $this->idPerfil . " Contraseña:  " . $this->contrasena .
+                " Rut: " . $this->rut;
+    }
 
-    
-    
-    
 }

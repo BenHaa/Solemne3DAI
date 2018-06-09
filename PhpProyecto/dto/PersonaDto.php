@@ -13,63 +13,64 @@
  */
 class PersonaDto {
 
-   private $rut;
-   private $nombre;
-   private $apellido_pat;
-   private $apellido_mat;
-   private $fecha_nacimiento;
-   private $sexo;
-   
-   
-   function getRut() {
-       return $this->rut;
-   }
+    private $rut;
+    private $nombre;
+    private $apellido_pat;
+    private $apellido_mat;
+    private $fecha_nacimiento;
+    private $sexo;
 
-   function getNombre() {
-       return $this->nombre;
-   }
+    function getRut() {
+        return $this->rut;
+    }
 
-   function getApellido_pat() {
-       return $this->apellido_pat;
-   }
+    function getNombre() {
+        return $this->nombre;
+    }
 
-   function getApellido_mat() {
-       return $this->apellido_mat;
-   }
+    function getApellido_pat() {
+        return $this->apellido_pat;
+    }
 
-   function getFecha_nacimiento() {
-       return $this->fecha_nacimiento;
-   }
+    function getApellido_mat() {
+        return $this->apellido_mat;
+    }
 
-   function getSexo() {
-       return $this->sexo;
-   }
+    function getFecha_nacimiento() {
+        return $this->fecha_nacimiento;
+    }
 
-   function setRut($rut) {
-       $this->rut = $rut;
-   }
+    function getSexo() {
+        return $this->sexo;
+    }
 
-   function setNombre($nombre) {
-       $this->nombre = $nombre;
-   }
+    function setRut($rut) {
+        $this->rut = $rut;
+    }
 
-   function setApellido_pat($apellido_pat) {
-       $this->apellido_pat = $apellido_pat;
-   }
+    function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
 
-   function setApellido_mat($apellido_mat) {
-       $this->apellido_mat = $apellido_mat;
-   }
+    function setApellido_pat($apellido_pat) {
+        $this->apellido_pat = $apellido_pat;
+    }
 
-   function setFecha_nacimiento($fecha_nacimiento) {
-       $this->fecha_nacimiento = $fecha_nacimiento;
-   }
+    function setApellido_mat($apellido_mat) {
+        $this->apellido_mat = $apellido_mat;
+    }
 
-   function setSexo($sexo) {
-       $this->sexo = $sexo;
-   }
+    function setFecha_nacimiento($fecha_nacimiento) {
+        $this->fecha_nacimiento = $fecha_nacimiento;
+    }
 
+    function setSexo($sexo) {
+        $this->sexo = $sexo;
+    }
 
-   
-   
+    public function __toString() {
+        return "Nombre: " . $this->nombre . " Apellido Paterno: " . $this->apellido_pat . " Apellido Materno: " . $this->apellido_mat . " Sexo: " . $this->sexo .
+                " Fecha nacimiento: " . $this->fecha_nacimiento . " Rut: " . $this->rut;
+    }
+
 }

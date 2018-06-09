@@ -11,6 +11,9 @@
  *
  * @author CETECOM
  */
-class UsuarioDao {
+include_once 'BaseDao.php';
+include_once 'ConversionDao.php';
+
+abstract class UsuarioDao implements BaseDao, ConversionDao {
     
 }

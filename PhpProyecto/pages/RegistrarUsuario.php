@@ -15,6 +15,22 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+
+
+        <?php
+        session_start();
+        if (isset($_SESSION["exito"])) {
+            if ($_SESSION["exito"] == true) {
+                ?>
+                <script> alert('Se registró el usuario correctamente');</script>    
+            <?php } else { ?>
+                <script> alert('No se registró el usuario');</script>    
+                <?php
+            }
+            unset($_SESSION["exito"]); //Se borra esta variable para que no despliegue la alerta cada vez que se quiera volver a esta página
+        }
+        ?>
+
         <form action="../server/RegistrarUsuario.php" method="POST">
             <table border="1" class="offset-md-1" >
                 <thead>
@@ -41,16 +57,16 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>Contraseña</td>
-                        <td><input type="text" name="txtContraseña" value="hola" /></td>
+                        <td><input type="text" name="txtContrasena" value="hola" /></td>
                     </tr>
                     <tr>
                         <td>Repetir Contraseña</td>
-                        <td><input type="text" name="txtContraseña2" value="hola" /></td>
+                        <td><input type="text" name="txtContrasena2" value="hola" /></td>
                     </tr>
                 </tbody>
             </table>
             <br>
-            <button type="button" class="btn btn-primary offset-md-2">Grabar</button>
+            <button type="submit" class="btn btn-primary offset-md-2">Grabar</button>
         </form>
 
         <script>

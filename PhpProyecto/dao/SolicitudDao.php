@@ -11,6 +11,14 @@
  *
  * @author CETECOM
  */
-class SolicitudDao {
-    //put your code here
+
+include_once 'BaseDao.php';
+include_once 'ConversionDao.php';
+
+
+abstract class SolicitudDao implements BaseDao, ConversionDao {
+
+    public static function listarSolicitudes();
+    
+    
 }

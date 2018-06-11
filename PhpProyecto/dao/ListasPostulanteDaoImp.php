@@ -14,7 +14,7 @@ class ListasPostulanteDaoImp implements Listados {
             $stmt->execute();
             $rs = $stmt->fetchAll();
             foreach ($rs as $comuna) {
-                $lista->append($comuna["descripcion"]);
+                $lista->append(utf8_encode($comuna["descripcion"]));
             }
             $clasePdo = null;
             return $lista;
@@ -22,7 +22,6 @@ class ListasPostulanteDaoImp implements Listados {
             echo "Error al agregar " . $ex->getMessage();
             return $lista;
         }
-        
     }
 
     public static function listarEducacion() {
@@ -33,8 +32,8 @@ class ListasPostulanteDaoImp implements Listados {
             $stmt = $clasePdo->prepare($query);
             $stmt->execute();
             $rs = $stmt->fetchAll();
-            foreach ($rs as $comuna) {
-                $lista->append($comuna["descripcion"]);
+            foreach ($rs as $educacion) {
+                $lista->append(utf8_encode($educacion["descripcion"]));
             }
             $clasePdo = null;
             return $lista;
@@ -52,8 +51,8 @@ class ListasPostulanteDaoImp implements Listados {
             $stmt = $clasePdo->prepare($query);
             $stmt->execute();
             $rs = $stmt->fetchAll();
-            foreach ($rs as $comuna) {
-                $lista->append($comuna["descripcion"]);
+            foreach ($rs as $civil) {
+                $lista->append(utf8_encode($civil["descripcion"]));
             }
             $clasePdo = null;
             return $lista;
@@ -71,8 +70,27 @@ class ListasPostulanteDaoImp implements Listados {
             $stmt = $clasePdo->prepare($query);
             $stmt->execute();
             $rs = $stmt->fetchAll();
-            foreach ($rs as $comuna) {
-                $lista->append($comuna["descripcion"]);
+            foreach ($rs as $renta) {
+                $lista->append(utf8_encode($renta["descripcion"]));
+            }
+            $clasePdo = null;
+            return $lista;
+        } catch (Exception $ex) {
+            echo "Error al agregar " . $ex->getMessage();
+            return $lista;
+        }
+    }
+
+    public static function listarSexo() {
+        $lista = new ArrayObject();
+        try {
+            $clasePdo = new clasePDO();
+            $query = "select descripcion from sexo";
+            $stmt = $clasePdo->prepare($query);
+            $stmt->execute();
+            $rs = $stmt->fetchAll();
+            foreach ($rs as $sexo) {
+                $lista->append(utf8_encode($sexo["descripcion"]));
             }
             $clasePdo = null;
             return $lista;

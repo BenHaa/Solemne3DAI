@@ -17,7 +17,7 @@ include_once '../sql/ClasePDO.php';
 
 class SolicitudDaoImpl extends SolicitudDao {
 
-    public static function ActulizarObjeto($id) {
+    public static function ActualizarObjeto($dto) {
         
     }
 
@@ -37,9 +37,11 @@ class SolicitudDaoImpl extends SolicitudDao {
             if ($stmt->execute()) {
                 $resultado = $stmt->fetchAll();
                 foreach ($resultado as $value) {
+                    $pdo = null;
                     return $value["rut_postulante"];
                 }
             } else {
+                $pdo = null;
                 return;
             }
         } catch (Exception $exc) {
@@ -56,7 +58,28 @@ class SolicitudDaoImpl extends SolicitudDao {
     }
 
     public static function agregarObjeto($dto) {
-        
+
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("INSERT INTO POSTULACION(id_postulante, estado_solicitud, fecha_registro) VALUES(?, ?, now())");
+            
+            $idP =$dto->getIdPostulante();
+            $idE = $dto->getIdEstado();
+            
+            $stmt->bindParam(1, $idP);
+            $stmt->bindParam(2, $idE);
+
+            if ($stmt->execute()) {
+                $pdo = null;
+                return true;
+            } else {
+                $pdo = null;
+                return false;
+            }
+            
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     public static function listarSolicitudes() {
@@ -81,6 +104,7 @@ class SolicitudDaoImpl extends SolicitudDao {
 
                 $lista->append($dto);
             }
+            $pdo = null;
         } catch (SQLException $exc) {
             echo "Error sql al listar solicitudes: " . $exc->getTraceAsString();
         } catch (Exception $e) {

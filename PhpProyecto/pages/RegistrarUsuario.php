@@ -71,8 +71,6 @@ and open the template in the editor.
 
         <script>
             $('#txtRut').rut({formatOn: 'keyup'});
-
-
         </script>
 
 

@@ -122,4 +122,19 @@ class PostulanteDto {
         $this->rutPersona = $rutPersona;
     }
 
+    public function __toString() {
+        return "Id Postulante: " . $this->idPostulante .  '<br>' .
+                " Direccion: " . $this->direccion .  '<br>' .
+                " Rut Postulante: " . $this->rutPersona .  '<br>' .
+                " Id Comuna: " . $this->idComuna .  '<br>' .
+                " Email: " . $this->idComuna . '<br>' .
+                " Telefono: " . $this->telefono . '<br>' .
+                " Sueldo liquido: " . $this->sueldoLiq .  '<br>' .
+                " Estado civil: " . $this->estadoCivil .  '<br>' .
+                " Hijos: " . $this->hijos .  '<br>' .
+                " Id Educacion: " .  $this->idNivelEducacion .  '<br>' .
+                " Renta: " . $this->renta .  '<br>' .
+                " Enfermedad cronica: " . $this->enfermedadCronica;
+    }
+
 }

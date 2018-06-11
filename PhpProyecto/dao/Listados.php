@@ -11,9 +11,14 @@
  * @author benja
  */
 interface Listados {
+
     public static function listarEstadoCivil();
+
     public static function listarComunas();
+
     public static function listarEducacion();
+
     public static function listarRenta();
-    
+
+    public static function listarSexo();
 }

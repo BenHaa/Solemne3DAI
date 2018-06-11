@@ -7,27 +7,35 @@
  */
 
 /**
- * Description of EstadoDaoImpl
+ * Description of SexoDaoImpl
  *
  * @author Ignacio
  */
-include_once 'EstadoDao.php';
+include_once 'SexoDao.php';
+include_once '../sql/ClasePDO.php';
 
-class EstadoDaoImpl extends EstadoDao {
+class SexoDaoImpl extends SexoDao {
 
-    //put your code here
     public static function IntToString($int) {
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("SELECT DESCRIPCION FROM ESTADO_SOLICITUD WHERE ID_ESTADO=?");
-            $stmt->bindParam(1, $int);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function StringToInt($string) {
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT id_sexo FROM SEXO WHERE DESCRIPCION=?");
+
+            $stmt->bindParam(1, $string);
 
             if ($stmt->execute()) {
                 $resultado = $stmt->fetchAll();
-                //Se indica el return debido a que retorna sólo un valor
                 foreach ($resultado as $value) {
                     $pdo = null;
-                    return $value["DESCRIPCION"];
+                    return $value["id_sexo"];
                 }
             } else {
                 $pdo = null;
@@ -36,10 +44,6 @@ class EstadoDaoImpl extends EstadoDao {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-    }
-
-    public static function StringToInt($string) {
-        
     }
 
 }

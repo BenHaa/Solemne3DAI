@@ -18,7 +18,7 @@ include_once '../sql/ClasePDO.php';
 class UsuarioDaoImpl extends UsuarioDao {
 
     //put your code here
-    public static function ActulizarObjeto($id) {
+    public static function ActualizarObjeto($dto) {
         
     }
 
@@ -39,14 +39,10 @@ class UsuarioDaoImpl extends UsuarioDao {
     }
 
     public static function agregarObjeto($dto) {
-        $pdo = new clasePDO();
+
         try {
-
-
-            $stmt = $pdo->prepare("INSERT INTO USUARIO(password, id_perfil, rut_persona, id_usuario) VALUES(?,?,?,?)");
-
-
-
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("INSERT INTO USUARIO(password, id_perfil, rut_persona) VALUES(?,?,?)");
             $password = $dto->getContrasena();
             $idPefil = $dto->getIdPerfil();
             $rut = $dto->getRut();
@@ -55,16 +51,17 @@ class UsuarioDaoImpl extends UsuarioDao {
             $stmt->bindParam(1, $password);
             $stmt->bindParam(2, $idPefil);
             $stmt->bindParam(3, $rut);
-            $stmt->bindParam(4, $idUsuario);
 
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $pdo = null;
                 return true;
             }
+            $pdo = null;
         } catch (Exception $exc) {
             echo "Error al agregar usuario: " . $exc->getTraceAsString();
         }
+
         return false;
     }
 

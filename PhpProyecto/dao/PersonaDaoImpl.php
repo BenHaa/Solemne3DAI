@@ -17,8 +17,31 @@ include_once '../sql/ClasePDO.php';
 
 class PersonaDaoImpl extends PersonaDao {
 
-    public static function ActulizarObjeto($id) {
-        
+    public static function ActualizarObjeto($dto) {
+
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("UPDATE PERSONA SET nombre=?, ap_paterno=?, ap_materno=?, sexo=? where rut=?;");
+
+            $nombre = $dto->getNombre();
+            $apellidoP = $dto->getApellido_pat();
+            $apellidoM = $dto->getApellido_mat();
+            //  $fechaNacimiento = $dto->getFecha_nacimiento();
+            $sexo = $dto->getSexo();
+            $rut = $dto->getRut();
+
+            $stmt->bindParam(1, $nombre);
+            $stmt->bindParam(2, $apellidoP);
+            $stmt->bindParam(3, $apellidoM);
+            //$stmt->bindParam(4, $fechaNacimiento);
+            $stmt->bindParam(4, $sexo);
+            $stmt->bindParam(5, $rut);
+
+
+            $stmt->execute();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     public static function EliminarObjeto($id) {
@@ -30,7 +53,28 @@ class PersonaDaoImpl extends PersonaDao {
     }
 
     public static function LeerObjeto($id) {
-        
+
+        $dto = new PersonaDto();
+
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM PERSONA WHERE RUT=?");
+            $stmt->bindParam(1, $id);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            foreach ($resultado as $value) {
+                $dto->setApellido_mat($value["ap_materno"]);
+                $dto->setApellido_pat($value["ap_paterno"]);
+                $dto->setSexo($value["sexo"]);
+                $dto->setFecha_nacimiento($value["fecha_nac"]);
+                $dto->setNombre($value["nombre"]);
+                $dto->setRut($value["rut"]);
+            }
+            $pdo = null;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+        return $dto;
     }
 
     public static function StringToInt($string) {

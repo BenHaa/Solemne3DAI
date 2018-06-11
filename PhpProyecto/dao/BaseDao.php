@@ -18,6 +18,5 @@ interface BaseDao {
 
     public static function EliminarObjeto($id);
 
-    public static function ActulizarObjeto($id);
-    
+    public static function ActualizarObjeto($dto);
 }

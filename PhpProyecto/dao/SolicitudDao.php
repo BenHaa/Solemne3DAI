@@ -19,4 +19,8 @@ abstract class SolicitudDao implements BaseDao, ConversionDao {
     public abstract static function listarSolicitudes();
 
     public abstract static function NombrePorId($id);
+    
+
+    
+    
 }

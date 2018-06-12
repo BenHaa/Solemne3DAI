@@ -32,13 +32,13 @@ class ComunaDaoImpl extends ComunaDao {
             if ($stmt->execute()) {
                 $resultado = $stmt->fetchAll();
                 foreach ($resultado as $value) {
-                    $pdo = null;
                     return $value["id_comuna"];
                 }
             } else {
                 $pdo = null;
                 return;
             }
+            $pdo = null;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

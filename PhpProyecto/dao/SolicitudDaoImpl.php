@@ -14,6 +14,8 @@
 include_once '../dto/SolicitudDto.php';
 include_once 'SolicitudDao.php';
 include_once '../sql/ClasePDO.php';
+include_once './EstadoDaoImpl.php';
+include_once '../dto/SolicitudPorRutDto.php';
 
 class SolicitudDaoImpl extends SolicitudDao {
 
@@ -136,6 +138,71 @@ class SolicitudDaoImpl extends SolicitudDao {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+    }
+
+    public static function BuscarPorFecha($ini, $fin) {
+        $lista = new ArrayObject();
+
+        try {
+            $pdo = new clasePDO();
+            $query="SELECT RUT_POSTULANTE as Rut,
+                CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
+                estado_solicitud as Estado 
+                from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)
+                join persona on (rut_postulante=rut) 
+                where rut_postulante=?";            
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(1, $ini);
+            $stmt->bindValue(2, $fin);
+
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            foreach ($resultado as $solicitud) {
+                $dto = new SolicitudPorRutDto();
+                $dto->setRut($solicitud["Rut"]);
+                $dto->setNombre($solicitud["Nombre"]);
+                $dto->setEstado(EstadoDaoImpl::IntToString($solicitud["Estado"]));
+                $lista->append($dto);
+            }
+            $pdo = null;
+        } catch (SQLException $exc) {
+            echo "Error sql al listar solicitudes: " . $exc->getTraceAsString();
+        } catch (Exception $e) {
+
+            echo "Error al listar solicitudes: " . $e->getTraceAsString();
+        }
+        return $lista;
+    }
+
+    public static function BuscarPorRut($rut) {
+        $lista = new ArrayObject();
+        try {
+            $pdo = new clasePDO();
+            $query="SELECT RUT_POSTULANTE as Rut,
+                CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
+                estado_solicitud as Estado 
+                from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)
+                join persona on (rut_postulante=rut) 
+                where rut_postulante=?";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(1, $rut);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll();
+            foreach ($resultado as $solicitud) {
+                $dto = new SolicitudPorRutDto();
+                $dto->setRut($solicitud["Rut"]);
+                $dto->setNombre($solicitud["Nombre"]);
+                $dto->setEstado(EstadoDaoImpl::IntToString($solicitud["Estado"]));
+                $lista->append($dto);
+            }
+            $pdo = null;
+        } catch (SQLException $exc) {
+            echo "Error sql al listar solicitudes: " . $exc->getTraceAsString();
+        } catch (Exception $e) {
+
+            echo "Error al listar solicitudes: " . $e->getTraceAsString();
+        }
+        return $lista;
     }
 
 }

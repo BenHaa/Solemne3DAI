@@ -20,6 +20,9 @@ abstract class SolicitudDao implements BaseDao, ConversionDao {
 
     public abstract static function NombrePorId($id);
     
+    public abstract static function BuscarPorRut($rut);
+    public abstract static function BuscarPorFecha($ini, $fin);
+    
 
     
     

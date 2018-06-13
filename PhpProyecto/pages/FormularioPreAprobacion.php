@@ -1,12 +1,40 @@
 <?php
-include_once './../dao/ListasPostulanteDaoImp.php';
+include_once '../dao/ListasPostulanteDaoImp.php';
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <script src="../css/js/jquery331.js"></script>
         <script src="../css/js/jquery.rut.js"></script>
+        <script src="../css/js/jquery-ui.js"></script>
         <link rel="stylesheet" href="../css/style/bootstrap.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <script>
+            $(document).ready(function () {
+                var availableTags = new Array();
+                $(function () {
+                    $('#txtComuna').bind("keyup", function (event) {
+                        var data = {'txtComuna': $('#txtComuna').val()};
+
+                        $.getJSON('../server/probandoAutocomplete.php', data, function (res, est, jqXHR) {
+
+                            availableTags.length = 0;
+
+                            $.each(res, function (i, item) {
+                                availableTags[i] = item;
+
+                            });
+                        });
+                    });
+                });
+
+                $("#txtComuna").autocomplete({
+                    source: availableTags,
+                    minLength: 1
+                });
+            });
+        </script>
 
         <title>Formulario Solicitud</title>
     </head>
@@ -41,8 +69,8 @@ include_once './../dao/ListasPostulanteDaoImp.php';
                                 <td>Apellido Materno</td>
                                 <td><input type="text" name="txtApMat" value="cumillaf" /></td>
                                 <td> &nbsp;&nbsp;Comuna</td>
-                                <td><!-- AQUI VA EL DROP DOWN DE COMUNAS DE BOOTSTRAP -->
-
+                                <td>
+                                    <input type="text" name="txtComuna" id="txtComuna" value="" />
                                 </td>
                             </tr>
                             <tr>
@@ -101,12 +129,13 @@ include_once './../dao/ListasPostulanteDaoImp.php';
                             </tr>
                             <tr>
                                 <td>Hijos</td>
-                                <td><input type="checkbox" name="chkHijos" value="ON"/>&nbsp;
-                                    Cantidad <input name="txtHijos" min="0" type="number" style="width: 50px"   value="2"/>
+                                <td><input type="checkbox" name="chkHijos" id="chkHijos" value="ON"/>&nbsp;
+                                    Cantidad <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px"   value="2" disabled/>
                                 </td>
                                 <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
                                 <td>
-                                    <input type="checkbox" name="chkenfermedad" value="ON" />&nbsp; Si
+                                    <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
+
 
                                 </td>
                             </tr>
@@ -115,6 +144,19 @@ include_once './../dao/ListasPostulanteDaoImp.php';
 
                         <script>
                             $('#txtRut').rut({formatOn: 'keyup'});
+
+                            $('#chkHijos').click(function () {
+
+                                if ($('#txtHijos').prop('disabled')) {
+                                    $('#txtHijos').prop('disabled', false);
+
+                                } else {
+                                    $('#txtHijos').prop('disabled', true);
+                                    $('#txtHijos').val('');
+                                }
+
+                            });
+
                         </script>
                     </table>
                 </div>

@@ -19,6 +19,20 @@ class SexoDaoImpl extends SexoDao {
     public static function IntToString($int) {
         try {
             $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT descripcion FROM SEXO WHERE ID_SEXO=?");
+
+            $stmt->bindParam(1, $int);
+
+            if ($stmt->execute()) {
+                $resultado = $stmt->fetchAll();
+                foreach ($resultado as $value) {
+                    return $value["descripcion"];
+                }
+            } else {
+                $pdo = null;
+                return;
+            }
+            $pdo = null;
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

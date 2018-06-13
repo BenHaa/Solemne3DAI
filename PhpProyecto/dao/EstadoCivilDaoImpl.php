@@ -18,7 +18,25 @@ class EstadoCivilDaoImpl extends EstadoCivilDao {
 
     //put your code here
     public static function IntToString($int) {
-        
+          try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT descripcion FROM ESTADO_CIVIL WHERE ID_EST_CIVIL=?");
+
+            $stmt->bindParam(1, $int);
+
+            if ($stmt->execute()) {
+                $resultado = $stmt->fetchAll();
+                foreach ($resultado as $value) {
+                    return $value["descripcion"];
+                }
+            } else {
+                $pdo = null;
+                return;
+            }
+            $pdo = null;
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     public static function StringToInt($string) {

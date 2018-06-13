@@ -31,6 +31,26 @@ class UsuarioDaoImpl extends UsuarioDao {
     }
 
     public static function LeerObjeto($id) {
+            $dto = new UsuarioDto();
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare('SELECT * FROM USUARIO WHERE RUT_PERSONA=? AND PASSWORD=?');
+            
+          
+            if($stmt->execute()){
+            
+                
+                $pdo=null;      
+                return true;
+            }
+                    
+            
+            
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+            
+        
         
     }
 
@@ -62,6 +82,25 @@ class UsuarioDaoImpl extends UsuarioDao {
             echo "Error al agregar usuario: " . $exc->getTraceAsString();
         }
 
+        return false;
+    }
+
+    public static function ComprobarUsuario($rut, $pass) {
+        $lista = new ArrayObject();
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("SELECT * FROM USUARIO WHERE RUT_PERSONA=? AND PASSWORD=?");
+
+            $stmt->bindParam(1, $rut);
+            $stmt->bindParam(2, $pass);
+            $stmt->execute();
+            echo 'hola';
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
         return false;
     }
 

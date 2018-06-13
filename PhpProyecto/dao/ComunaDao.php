@@ -14,5 +14,8 @@
 include_once 'ConversionDao.php';
 
 abstract class ComunaDao implements ConversionDao {
-    //put your code here
+
+    public abstract static function AutoCompletadoComuna($string);
+    
+    
 }

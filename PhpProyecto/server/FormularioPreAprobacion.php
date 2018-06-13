@@ -21,7 +21,8 @@ include_once '../dao/EstadoCivilDaoImpl.php';
 //Primero se actualiza el objeto persona
 //falta setear fecha
 $dtoPersona = PersonaDaoImpl::LeerObjeto($_POST["txtRut"]);
-
+$dtoPersona->setFecha_nacimiento($_POST["fechaNac"]);
+echo $_POST["fechaNac"];
 $dtoPersona->setSexo(SexoDaoImpl::StringToInt($_POST["cmbSexo"]));
 echo $dtoPersona->__toString();
 PersonaDaoImpl::ActualizarObjeto($dtoPersona);
@@ -34,10 +35,14 @@ $dtoPostulante = new PostulanteDto();
 
 $dtoPostulante->setDireccion($_POST["txtDireccion"]);
 $dtoPostulante->setEmail($_POST["txtEmail"]);
-$dtoPostulante->setEnfermedadCronica(true);
+if (isset($_POST["chkEnfermedad"])) {
+    $dtoPostulante->setEnfermedadCronica(true);
+} else {
+    $dtoPostulante->setEnfermedadCronica(false);
+}
 $dtoPostulante->setEstadoCivil(EstadoCivilDaoImpl::StringToInt($_POST["cmbEstadoCivil"]));
 $dtoPostulante->setHijos($_POST["txtHijos"]);
-$dtoPostulante->setIdComuna(1);
+$dtoPostulante->setIdComuna(ComunaDaoImpl::StringToInt($_POST["txtComuna"]));
 //$dtoPostulante->setIdComuna(ComunaDaoImpl::StringToInt($_POST["cmbComuna"]));
 $dtoPostulante->setIdNivelEducacion(EducacionDaoImpl::StringToInt($_POST["cmbEducacion"]));
 $dtoPostulante->setRenta(RentaDaoImpl::StringToInt($_POST["cmbRenta"]));

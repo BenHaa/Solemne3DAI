@@ -15,5 +15,5 @@ include_once 'BaseDao.php';
 include_once 'ConversionDao.php';
 
 abstract class UsuarioDao implements BaseDao, ConversionDao {
-    
+    public abstract static function ComprobarUsuario($rut, $pass);
 }

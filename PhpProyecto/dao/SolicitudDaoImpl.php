@@ -14,7 +14,7 @@
 include_once '../dto/SolicitudDto.php';
 include_once 'SolicitudDao.php';
 include_once '../sql/ClasePDO.php';
-include_once './EstadoDaoImpl.php';
+include_once 'EstadoDaoImpl.php';
 include_once '../dto/SolicitudPorRutDto.php';
 
 class SolicitudDaoImpl extends SolicitudDao {
@@ -24,7 +24,23 @@ class SolicitudDaoImpl extends SolicitudDao {
     }
 
     public static function EliminarObjeto($id) {
-        
+
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("DELETE FROM POSTULACION WHERE ID_SOLICITUD=?");
+
+            $stmt->bindParam(1, $id);
+
+            if ($stmt->execute()) {
+                $pdo = null;
+                return true;
+            } else {
+                $pdo=null;
+                return;
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
     //Se obtendrá el rut del postulante mediante el id de postualante en la solicitud
@@ -64,10 +80,10 @@ class SolicitudDaoImpl extends SolicitudDao {
         try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("INSERT INTO POSTULACION(id_postulante, estado_solicitud, fecha_registro) VALUES(?, ?, now())");
-            
-            $idP =$dto->getIdPostulante();
+
+            $idP = $dto->getIdPostulante();
             $idE = $dto->getIdEstado();
-            
+
             $stmt->bindParam(1, $idP);
             $stmt->bindParam(2, $idE);
 
@@ -78,7 +94,6 @@ class SolicitudDaoImpl extends SolicitudDao {
                 $pdo = null;
                 return false;
             }
-            
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
@@ -103,7 +118,7 @@ class SolicitudDaoImpl extends SolicitudDao {
                 $dto->setFechaRegistro($solicitud["fecha_registro"]);
                 $dto->setIdPostulante($solicitud["id_postulante"]);
                 $dto->setIdSolicitud($solicitud["id_solicitud"]);
-
+                
                 $lista->append($dto);
             }
             $pdo = null;
@@ -145,12 +160,12 @@ class SolicitudDaoImpl extends SolicitudDao {
 
         try {
             $pdo = new clasePDO();
-            $query="SELECT RUT_POSTULANTE as Rut,
+            $query = "SELECT RUT_POSTULANTE as Rut,
                 CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
                 estado_solicitud as Estado 
                 from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)
                 join persona on (rut_postulante=rut) 
-                where rut_postulante=?";            
+                where rut_postulante=?";
             $stmt = $pdo->prepare($query);
             $stmt->bindValue(1, $ini);
             $stmt->bindValue(2, $fin);
@@ -178,7 +193,7 @@ class SolicitudDaoImpl extends SolicitudDao {
         $lista = new ArrayObject();
         try {
             $pdo = new clasePDO();
-            $query="SELECT RUT_POSTULANTE as Rut,
+            $query = "SELECT RUT_POSTULANTE as Rut,
                 CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
                 estado_solicitud as Estado 
                 from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)

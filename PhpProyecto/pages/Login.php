@@ -17,15 +17,14 @@
             <div class="row centered">
                 <div class="col"></div>
                 <div class="col">
-                    <form class="form-group"action="C_Login" method="POST">
+                    <form class="form-group"action="../server/Login.php" method="POST">
                         RUT<br>
-                        <input type="text" name="txtRut"><br>
+                        <input type="text" name="txtRut" value="19.360.198-7"><br>
                         CONTRASEÑA<br>
-                        <input type="password" name="txtPassword"><br><br>
+                        <input type="password" name="txtPassword" value="hola"><br><br>
                         <input type="submit" class="btn btn-primary" value="INICIAR SESION">                    
                     </form>
                 </div>
-
 
             </div>
         </div>

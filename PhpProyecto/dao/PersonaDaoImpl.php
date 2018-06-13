@@ -21,21 +21,21 @@ class PersonaDaoImpl extends PersonaDao {
 
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("UPDATE PERSONA SET nombre=?, ap_paterno=?, ap_materno=?, sexo=? where rut=?;");
+            $stmt = $pdo->prepare("UPDATE PERSONA SET nombre=?, ap_paterno=?, ap_materno=?, sexo=?, fecha_nac=? where rut=?;");
 
             $nombre = $dto->getNombre();
             $apellidoP = $dto->getApellido_pat();
             $apellidoM = $dto->getApellido_mat();
-            //  $fechaNacimiento = $dto->getFecha_nacimiento();
+            $fechaNacimiento = $dto->getFecha_nacimiento();
             $sexo = $dto->getSexo();
             $rut = $dto->getRut();
 
             $stmt->bindParam(1, $nombre);
             $stmt->bindParam(2, $apellidoP);
             $stmt->bindParam(3, $apellidoM);
-            //$stmt->bindParam(4, $fechaNacimiento);
             $stmt->bindParam(4, $sexo);
-            $stmt->bindParam(5, $rut);
+            $stmt->bindParam(5, $fechaNacimiento);
+            $stmt->bindParam(6, $rut);
 
 
             $stmt->execute();

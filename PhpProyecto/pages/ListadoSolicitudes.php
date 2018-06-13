@@ -12,21 +12,28 @@ include_once '../dao/PostulanteDaoImpl.php';
 include_once '../dao/PersonaDaoImpl.php';
 include_once '../dto/PersonaDto.php';
 include_once '../dto/PostulanteDto.php';
+
+include_once '../dao/SexoDaoImpl.php';
+include_once '../dao/ComunaDaoImpl.php';
+include_once '../dao/EducacionDaoImpl.php';
+include_once '../dao/EstadoCivilDaoImpl.php';
+include_once '../dao/RentaDaoImpl.php';
 ?>
 
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../css/style/bootstrap.css">
         <script src="../css/js/jquery331.js"></script>
-        <script src="../css/js/bootstrap.js"></script>
         <script src="../css/js/jquery.rut.js"></script>
+        <link rel="stylesheet" href="../css/style/bootstrap.css">
+        <script src="../css/js/bootstrap.js"></script>
 
         <title></title>
     </head>
     <body>
         <?php
         $lista = SolicitudDaoImpl::listarSolicitudes();
+        $contador = 0;
         ?>
 
         <table border="1" >
@@ -41,6 +48,7 @@ include_once '../dto/PostulanteDto.php';
             <tbody>
                 <?php
                 foreach ($lista as $value) {
+                    $contador++;
                     //Se lee el objeto postulante a partir del id para desplegar sus datos en el modal de detalle
                     $dtoPostulante = PostulanteDaoImpl::LeerObjeto($value->getIdPostulante());
 
@@ -88,27 +96,27 @@ include_once '../dto/PostulanteDto.php';
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 50%; height: 40px;">&nbsp;Apellido Materno:  <?php echo $dtoPersona->getApellido_mat(); ?></td>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Comuna:  <?php echo $dtoPostulante->getIdComuna(); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Comuna:  <?php echo ComunaDaoImpl::IntToString($dtoPostulante->getIdComuna()); ?></td>
 
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 50%; height: 40px;">&nbsp;Fecha de nacimiento:  <?php echo $dtoPersona->getFecha_nacimiento(); ?></td>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Educación:  <?php echo $dtoPostulante->getIdNivelEducacion(); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Educación:  <?php echo EducacionDaoImpl::IntToString($dtoPostulante->getIdNivelEducacion()); ?></td>
 
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Sexo:  <?php echo $dtoPersona->getSexo(); ?></td>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Tipo de renta:  <?php  echo$dtoPostulante->getRenta(); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Sexo:  <?php echo SexoDaoImpl::IntToString($dtoPersona->getSexo()); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Tipo de renta:  <?php echo RentaDaoImpl::IntToString($dtoPostulante->getRenta()); ?></td>
 
                                                     </tr>
                                                     <tr>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Estado civil:  <?php  echo$dtoPostulante->getEstadoCivil(); ?></td>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Sueldo líquido:  <?php  echo$dtoPostulante->getSueldoLiq(); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Estado civil:  <?php echo EstadoCivilDaoImpl::IntToString($dtoPostulante->getEstadoCivil()); ?></td>
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Sueldo líquido:  <?php echo $dtoPostulante->getSueldoLiq(); ?></td>
 
                                                     </tr>
                                                     <tr>
                                                         <td style="width: 50%; height: 40px;">&nbsp;Hijos: <?php echo $dtoPostulante->getHijos(); ?> </td>
-                                                        <td style="width: 50%; height: 40px;">&nbsp;Padece alguna enfermedad crónica: <?php echo $dtoPostulante->getEnfermedadCronica(); ?></td> 
+                                                        <td style="width: 50%; height: 40px;">&nbsp;Padece alguna enfermedad crónica: <?php echo ($dtoPostulante->getEnfermedadCronica()) ? "Si " : "No" ?></td> 
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -154,10 +162,28 @@ include_once '../dto/PostulanteDto.php';
 
 
 
-                            <input type="submit" value="Eliminar" name="btnEliminar"  class="btn btn-primary"/>
+                            <input type="submit" value="Eliminar" name="btnEliminar"  id="btnEliminar<?php echo $value->getIdSolicitud(); ?>" class="btn btn-primary"/>
 
 
+                            <script>
+                                $('#btnEliminar<?php echo $value->getIdSolicitud(); ?>').click(function () {
+                                    $.ajax({
+                                        data: {"idSolicitud": <?php echo $contador; ?>},
+                                        method: "POST",
+                                        url: '../server/FPAEliminarSolicitud.php',
+                                        success: function () {
+                                            if (confirm("Se ha rechazado la solicitud,  ¿desea continuar?")) {
+                                        
+                                                $('#btnEliminar<?php echo $value->getIdSolicitud(); ?>').closest('tr').fadeOut();
 
+                                            }
+                                        }
+                                    });
+
+                                });
+
+
+                            </script>
 
 
                         </td>

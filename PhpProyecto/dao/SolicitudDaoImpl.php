@@ -35,7 +35,7 @@ class SolicitudDaoImpl implements SolicitudDao {
                 $pdo = null;
                 return true;
             } else {
-                $pdo=null;
+                $pdo = null;
                 return;
             }
         } catch (Exception $exc) {
@@ -118,7 +118,7 @@ class SolicitudDaoImpl implements SolicitudDao {
                 $dto->setFechaRegistro($solicitud["fecha_registro"]);
                 $dto->setIdPostulante($solicitud["id_postulante"]);
                 $dto->setIdSolicitud($solicitud["id_solicitud"]);
-                
+
                 $lista->append($dto);
             }
             $pdo = null;
@@ -218,6 +218,51 @@ class SolicitudDaoImpl implements SolicitudDao {
             echo "Error al listar solicitudes: " . $e->getTraceAsString();
         }
         return $lista;
+    }
+
+    //Verifica que el postulante no haya hecho una solicitud previamente
+    public static function ExisteSolicitudPostulante($rut) {
+
+        try {
+            $pdo = new clasePDO();
+
+            $stmt = $pdo->prepare("SELECT * FROM POSTULACION JOIN POSTULANTE ON POSTULACION.ID_POSTULANTE=POSTULANTE.ID_POSTULANTE WHERE RUT_POSTULANTE=?"
+            );
+            $stmt->bindParam(1, $rut);
+
+            if ($stmt->execute()) {
+                if (!empty(($stmt->fetchAll()))) {
+                    $pdo = null;
+                    return true;
+                } else {
+                    $pdo = null;
+                    return false;
+                }
+            }
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
+    }
+
+    public static function ActualizarEstado($id_estado) {
+        try {
+            $pdo = new clasePDO();
+            $stmt = $pdo->prepare("UPDATE POSTULACION SET ESTADO_SOLICITUD=?");
+            $stmt->bindParam(1, $id_estado);
+            
+        if($stmt->execute()){
+            $pdo=null;
+            return true;
+            
+        }else{
+            $pdo=null;
+            return false;
+        }
+            
+
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        }
     }
 
 }

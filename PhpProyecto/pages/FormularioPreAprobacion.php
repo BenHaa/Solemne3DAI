@@ -70,7 +70,7 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                                 <td><input type="text" name="txtApMat" value="cumillaf" /></td>
                                 <td> &nbsp;&nbsp;Comuna</td>
                                 <td>
-                                    <input type="text" name="txtComuna" id="txtComuna" value="" />
+                                    <input type="text" name="txtComuna" id="txtComuna" value="Santiago" />
                                 </td>
                             </tr>
                             <tr>
@@ -91,6 +91,7 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                             <tr>
                                 <td>&nbsp;&nbsp;Sexo</td>
                                 <td>
+                                    
                                     <select name="cmbSexo">
                                         <?php
                                         $listaNivelEducacione = ListasPostulanteDaoImp::listarSexo();
@@ -99,6 +100,7 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                                         }
                                         ?>
                                     </select>
+                                    
                                 </td>
                                 <td>&nbsp;&nbsp;Renta</td>
                                 <td>
@@ -116,12 +118,15 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                                 <td>Estado Civil</td>
                                 <td>
                                     <select name="cmbEstadoCivil">
+
                                         <?php
                                         $listaEstadoCivil = ListasPostulanteDaoImp::listarEstadoCivil();
                                         foreach ($listaEstadoCivil as $value) {
                                             echo "<option>" . $value . "</option>";
                                         }
                                         ?>
+                                        
+
                                     </select>
                                 </td>
                                 <td>&nbsp;&nbsp;Sueldo Liquido</td>

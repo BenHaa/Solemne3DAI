@@ -63,32 +63,35 @@ class PostulanteDaoImpl implements BaseDao, ConversionDao {
     }
 
     public static function LeerObjeto($id) {
-        $dto = new PostulanteDto();
         try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM POSTULANTE WHERE ID_POSTULANTE=?");
             $stmt->bindParam(1, $id);
-            $stmt->execute();
-            $resultado = $stmt->fetchAll();
+            if ($stmt->execute()) {
+                $dto = new PostulanteDto();
 
-            foreach ($resultado as $value) {
-                $dto->setDireccion($value["direccion"]);
-                $dto->setEmail($value["email"]);
-                $dto->setIdComuna($value["comuna"]);
-                $dto->setIdNivelEducacion($value["nivel_educacion"]);
-                $dto->setEnfermedadCronica($value["enfermedad_cronica"]);
-                $dto->setSueldoLiq($value["sueldo_liq"]);
-                $dto->setRutPersona($value["rut_postulante"]);
-                $dto->setHijos($value["hijos"]);
-                $dto->setEstadoCivil($value["est_civil"]);
-                $dto->setIdPostulante($value["id_postulante"]);
-                $dto->setRenta($value["renta"]);
-                $dto->setTelefono($value["telefono"]);
+                $resultado = $stmt->fetchAll();
+                foreach ($resultado as $value) {
+
+                    $dto->setDireccion($value["direccion"]);
+                    $dto->setEmail($value["email"]);
+                    $dto->setIdComuna($value["comuna"]);
+                    $dto->setIdNivelEducacion($value["nivel_educacion"]);
+                    $dto->setEnfermedadCronica($value["enfermedad_cronica"]);
+                    $dto->setSueldoLiq($value["sueldo_liq"]);
+                    $dto->setRutPersona($value["rut_postulante"]);
+                    $dto->setHijos($value["hijos"]);
+                    $dto->setEstadoCivil($value["est_civil"]);
+                    $dto->setIdPostulante($value["id_postulante"]);
+                    $dto->setRenta($value["renta"]);
+                    $dto->setTelefono($value["telefono"]);
+                    return $dto;
+                }
             }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-        return $dto;
+        return;
     }
 
     public static function IntToString($int) {

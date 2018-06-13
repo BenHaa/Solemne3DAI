@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 
 <?php
+include_once '../dao/ListasPostulanteDaoImp.php';
 include_once '../dao/SolicitudDaoImpl.php';
 include_once '../dao/EstadoDaoImpl.php';
 include_once '../dao/PostulanteDaoImpl.php';
@@ -47,26 +48,26 @@ include_once '../dao/RentaDaoImpl.php';
             </thead>
             <tbody>
                 <?php
-                foreach ($lista as $value) {
+                foreach ($lista as $id) {
                     $contador++;
                     //Se lee el objeto postulante a partir del id para desplegar sus datos en el modal de detalle
-                    $dtoPostulante = PostulanteDaoImpl::LeerObjeto($value->getIdPostulante());
-
+                    $dtoPostulante = PostulanteDaoImpl::LeerObjeto($id->getIdPostulante());
+            
                     //Se lee el objeto persona a partir del id de postulante para desplegar sus datos en el modal de detalle
                     $dtoPersona = PersonaDaoImpl::LeerObjeto($dtoPostulante->getRutPersona());
                     ?>
                     <tr>
-                        <td><?php echo SolicitudDaoImpl::IntToString($value->getIdPostulante()); ?> </td>
-                        <td><?php echo SolicitudDaoImpl::NombrePorId($value->getIdPostulante()); ?> </td>
-                        <td><?php echo EstadoDaoImpl::IntToString($value->getIdEstado()); ?> </td>
+                        <td><?php echo SolicitudDaoImpl::IntToString($id->getIdPostulante()); ?> </td>
+                        <td><?php echo SolicitudDaoImpl::NombrePorId($id->getIdPostulante()); ?> </td>
+                        <td><?php echo EstadoDaoImpl::IntToString($id->getIdEstado()); ?> </td>
                         <td>
                             <!-- Button trigger modal Ver Detalle -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalVer<?php echo $value->getIdSolicitud(); ?>">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalVer<?php echo $id->getIdSolicitud(); ?>">
                                 Ver
                             </button>
 
                             <!-- Modal Ver Detalle-->
-                            <div class="modal fade " id="modalVer<?php echo $value->getIdSolicitud(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade " id="modalVer<?php echo $id->getIdSolicitud(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document" style="margin: 3.75rem auto;">
                                     <div class="modal-content modal-lg" style="width: 700px; margin-left: -80px;
                                          ">
@@ -135,22 +136,147 @@ include_once '../dao/RentaDaoImpl.php';
 
 
                             <!-- Button trigger modal Editar Solicitud -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar<?php echo $value->getIdSolicitud(); ?>">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditar<?php echo $id->getIdSolicitud(); ?>">
                                 Editar
                             </button>
 
                             <!-- Modal Editar Solicitud -->
-                            <div class="modal fade" id="modalEditar<?php echo $value->getIdSolicitud(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalEditar<?php echo $id->getIdSolicitud(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
+                                    <div class="modal-content modal-lg" style="width:700px;">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" >Modal title</h5>
+                                            <h5 class="modal-title" >Editar estado</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+
+
+
+
+                                            <table border="0" class="table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Rut</td>
+                                                        <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" /></td>
+                                                        <td> &nbsp; Telefono</td>
+                                                        <td><input type="text" name="txtTelefono" value="6034690" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nombre</td>
+                                                        <td><input type="text" name="txtNombre" value="nacho" /></td>
+                                                        <td> &nbsp; Email</td>
+                                                        <td><input type="email" name="txtEmail" value="nacho@gmail.com" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Apellido Paterno</td>
+                                                        <td><input type="text" name="txtApPat" value="perez" /></td>
+                                                        <td> &nbsp; Direccion</td>
+                                                        <td><input type="text" name="txtDireccion" value="loquesea#381" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Apellido Materno</td>
+                                                        <td><input type="text" name="txtApMat" value="cumillaf" /></td>
+                                                        <td> &nbsp;&nbsp;Comuna</td>
+                                                        <td>
+                                                            <input type="text" name="txtComuna" id="txtComuna" value="" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Fecha Nacimineto</td>
+                                                        <td><input type="date" name="fechaNac" value="" /></td>
+                                                        <td> &nbsp;&nbsp;Educacion</td>
+                                                        <td>
+                                                            <select name="cmbEducacion">
+                                                                <?php
+                                                                $listaNivelEducacion = ListasPostulanteDaoImp::listarEducacion();
+                                                                foreach ($listaNivelEducacion as $value) {
+                                                                    echo "<option>" . $value . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>&nbsp;&nbsp;Sexo</td>
+                                                        <td>
+                                                            <select name="cmbSexo">
+                                                                <?php
+                                                                $listaNivelEducacione = ListasPostulanteDaoImp::listarSexo();
+                                                                foreach ($listaNivelEducacione as $value) {
+                                                                    echo "<option>" . $value . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;Renta</td>
+                                                        <td>
+                                                            <select name="cmbRenta">
+                                                                <?php
+                                                                $listaRenta = ListasPostulanteDaoImp::listarRenta();
+                                                                foreach ($listaRenta as $value) {
+                                                                    echo "<option>" . $value . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Estado Civil</td>
+                                                        <td>
+                                                            <select name="cmbEstadoCivil">
+                                                                <?php
+                                                                $listaEstadoCivil = ListasPostulanteDaoImp::listarEstadoCivil();
+                                                                foreach ($listaEstadoCivil as $value) {
+                                                                    echo "<option>" . $value . "</option>";
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;Sueldo Liquido</td>
+                                                        <td><input type="number" name="txtSueldo" value="650000" /></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Hijos</td>
+                                                        <td><input type="checkbox" name="chkHijos" id="chkHijos" value="ON"/>&nbsp;
+                                                            Cantidad <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px"   value="2" disabled/>
+                                                        </td>
+                                                        <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
+                                                        <td>
+                                                            <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
+
+
+
+
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                                <script>
+                                                    $('#txtRut').rut({formatOn: 'keyup'});
+
+                                                    $('#chkHijos').click(function () {
+
+                                                        if ($('#txtHijos').prop('disabled')) {
+                                                            $('#txtHijos').prop('disabled', false);
+
+                                                        } else {
+                                                            $('#txtHijos').prop('disabled', true);
+                                                            $('#txtHijos').val('');
+                                                        }
+
+                                                    });
+
+                                            
+                                                </script>
+                                            </table>
+
+
+                                            
+
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -162,19 +288,19 @@ include_once '../dao/RentaDaoImpl.php';
 
 
 
-                            <input type="submit" value="Eliminar" name="btnEliminar"  id="btnEliminar<?php echo $value->getIdSolicitud(); ?>" class="btn btn-primary"/>
+                            <input type="submit" value="Eliminar" name="btnEliminar"  id="btnEliminar<?php echo $id->getIdSolicitud();?>" class="btn btn-primary"/>
 
 
                             <script>
-                                $('#btnEliminar<?php echo $value->getIdSolicitud(); ?>').click(function () {
+                                $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').click(function () {
                                     $.ajax({
                                         data: {"idSolicitud": <?php echo $contador; ?>},
                                         method: "POST",
                                         url: '../server/FPAEliminarSolicitud.php',
                                         success: function () {
-                                            if (confirm("Se ha rechazado la solicitud,  ¿desea continuar?")) {
-                                        
-                                                $('#btnEliminar<?php echo $value->getIdSolicitud(); ?>').closest('tr').fadeOut();
+                                            if (confirm("¿Realmente desea eliminar la solicitud?")) {
+
+                                                $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').closest('tr').fadeOut();
 
                                             }
                                         }

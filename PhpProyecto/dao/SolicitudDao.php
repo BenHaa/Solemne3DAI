@@ -23,4 +23,11 @@ interface SolicitudDao extends BaseDao, ConversionDao {
     public static function BuscarPorRut($rut);
 
     public static function BuscarPorFecha($ini, $fin);
+
+    public static function ExisteSolicitudPostulante($rut);
+    
+    public static function ActualizarEstado($id_estado);
+    
+    
+    
 }

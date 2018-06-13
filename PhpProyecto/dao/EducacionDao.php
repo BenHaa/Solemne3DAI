@@ -14,6 +14,6 @@
 include_once 'ConversionDao.php';
 
 
-abstract class EducacionDao implements ConversionDao {
+interface EducacionDao extends ConversionDao {
     
 }

@@ -26,7 +26,7 @@ class PostulanteDaoImpl implements BaseDao, ConversionDao {
                     . " (est_civil, hijos, telefono,"
                     . " email, direccion, comuna,"
                     . " nivel_educacion, renta,"
-                    . " sueldo_liq, Enfermedad_cronica,"
+                    . " sueldo_liq, enfermedad_cronica,"
                     . " rut_postulante)"
                     . " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $clasePdo->prepare($query);
@@ -76,7 +76,7 @@ class PostulanteDaoImpl implements BaseDao, ConversionDao {
                 $dto->setEmail($value["email"]);
                 $dto->setIdComuna($value["comuna"]);
                 $dto->setIdNivelEducacion($value["nivel_educacion"]);
-                $dto->setEnfermedadCronica($value["Enfermedad_cronica"]);
+                $dto->setEnfermedadCronica($value["enfermedad_cronica"]);
                 $dto->setSueldoLiq($value["sueldo_liq"]);
                 $dto->setRutPersona($value["rut_postulante"]);
                 $dto->setHijos($value["hijos"]);

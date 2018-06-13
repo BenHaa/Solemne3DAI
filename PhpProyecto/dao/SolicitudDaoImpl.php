@@ -17,7 +17,7 @@ include_once '../sql/ClasePDO.php';
 include_once 'EstadoDaoImpl.php';
 include_once '../dto/SolicitudPorRutDto.php';
 
-class SolicitudDaoImpl extends SolicitudDao {
+class SolicitudDaoImpl implements SolicitudDao {
 
     public static function ActualizarObjeto($dto) {
         

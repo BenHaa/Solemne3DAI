@@ -13,6 +13,6 @@
  */
 include_once 'ConversionDao.php';
 
-abstract class RentaDao implements ConversionDao {
+interface RentaDao extends ConversionDao {
     //put your code here
 }

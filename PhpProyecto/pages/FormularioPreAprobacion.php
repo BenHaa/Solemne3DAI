@@ -9,7 +9,6 @@ include_once '../dao/ListasPostulanteDaoImp.php';
         <script src="../css/js/jquery-ui.js"></script>
         <link rel="stylesheet" href="../css/style/bootstrap.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
         <script>
             $(document).ready(function () {
                 var availableTags = new Array();
@@ -35,6 +34,7 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                 });
             });
         </script>
+
 
         <title>Formulario Solicitud</title>
     </head>
@@ -135,6 +135,9 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                                 <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
                                 <td>
                                     <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
+
+
+
 
 
                                 </td>

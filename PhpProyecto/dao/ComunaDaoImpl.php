@@ -15,7 +15,7 @@ include_once '../dao/ComunaDao.php';
 include_once '../dto/ComunaDto.php';
 include_once '../sql/ClasePDO.php';
 
-class ComunaDaoImpl extends ComunaDao {
+class ComunaDaoImpl implements ComunaDao {
 
     //put your code here
     public static function IntToString($int) {
@@ -78,7 +78,7 @@ class ComunaDaoImpl extends ComunaDao {
 
 
                 foreach ($resultado as $value) {
-                    $lista->append(utf8_encode($value['descripcion']));
+                    $lista->append($value['descripcion']);
                 }
                 $pdo = null;
             } else {

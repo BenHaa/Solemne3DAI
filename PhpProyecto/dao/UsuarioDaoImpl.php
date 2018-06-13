@@ -15,7 +15,7 @@ include_once 'UsuarioDao.php';
 include_once '../dto/UsuarioDto.php';
 include_once '../sql/ClasePDO.php';
 
-class UsuarioDaoImpl extends UsuarioDao {
+class UsuarioDaoImpl implements UsuarioDao {
 
     //put your code here
     public static function ActualizarObjeto($dto) {

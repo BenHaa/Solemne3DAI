@@ -14,7 +14,7 @@
 include_once 'RentaDao.php';
 include_once '../sql/ClasePDO.php';
 
-class RentaDaoImpl extends RentaDao {
+class RentaDaoImpl implements RentaDao {
 
     //put your code here
     public static function IntToString($int) {

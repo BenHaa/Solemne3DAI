@@ -14,7 +14,7 @@
 include_once 'EducacionDao.php';
 include_once '../sql/ClasePDO.php';
 
-class EducacionDaoImpl extends EducacionDao {
+class EducacionDaoImpl implements EducacionDao {
 
     public static function IntToString($int) {
           try {

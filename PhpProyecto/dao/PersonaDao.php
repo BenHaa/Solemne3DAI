@@ -14,6 +14,6 @@
 include_once 'BaseDao.php';
 include_once 'ConversionDao.php';
 
-abstract class PersonaDao implements BaseDao, ConversionDao {
+interface PersonaDao extends BaseDao, ConversionDao {
     
 }

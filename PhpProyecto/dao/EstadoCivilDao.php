@@ -13,6 +13,6 @@
  */
 include_once 'ConversionDao.php';
 
-abstract class EstadoCivilDao implements ConversionDao {
+interface EstadoCivilDao extends ConversionDao {
     //put your code here
 }

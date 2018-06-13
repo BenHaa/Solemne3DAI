@@ -14,7 +14,7 @@
 include_once 'EstadoCivilDao.php';
 include_once '../sql/ClasePDO.php';
 
-class EstadoCivilDaoImpl extends EstadoCivilDao {
+class EstadoCivilDaoImpl implements EstadoCivilDao {
 
     //put your code here
     public static function IntToString($int) {

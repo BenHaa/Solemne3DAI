@@ -15,7 +15,7 @@ include_once 'PersonaDao.php';
 include_once '../dto/PersonaDto.php';
 include_once '../sql/ClasePDO.php';
 
-class PersonaDaoImpl extends PersonaDao {
+class PersonaDaoImpl implements PersonaDao {
 
     public static function ActualizarObjeto($dto) {
 

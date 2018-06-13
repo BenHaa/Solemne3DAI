@@ -13,7 +13,7 @@
  */
 include_once 'BaseDao.php';
 
-abstract class PostulanteDao implements BaseDao {
+interface PostulanteDao extends BaseDao {
 
     //put your code here
     //registrar postulante

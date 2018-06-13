@@ -14,7 +14,7 @@
 include_once 'SexoDao.php';
 include_once '../sql/ClasePDO.php';
 
-class SexoDaoImpl extends SexoDao {
+class SexoDaoImpl implements SexoDao {
 
     public static function IntToString($int) {
         try {

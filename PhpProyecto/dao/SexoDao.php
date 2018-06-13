@@ -13,6 +13,6 @@
  */
 include_once 'ConversionDao.php';
 
-abstract class SexoDao implements ConversionDao {
+interface SexoDao extends ConversionDao {
     
 }

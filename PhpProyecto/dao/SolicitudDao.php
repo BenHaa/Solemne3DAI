@@ -14,16 +14,13 @@
 include_once 'BaseDao.php';
 include_once 'ConversionDao.php';
 
-abstract class SolicitudDao implements BaseDao, ConversionDao {
+interface SolicitudDao extends BaseDao, ConversionDao {
 
-    public abstract static function listarSolicitudes();
+    public static function listarSolicitudes();
 
-    public abstract static function NombrePorId($id);
-    
-    public abstract static function BuscarPorRut($rut);
-    public abstract static function BuscarPorFecha($ini, $fin);
-    
+    public static function NombrePorId($id);
 
-    
-    
+    public static function BuscarPorRut($rut);
+
+    public static function BuscarPorFecha($ini, $fin);
 }

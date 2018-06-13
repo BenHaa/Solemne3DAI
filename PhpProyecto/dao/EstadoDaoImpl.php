@@ -13,7 +13,7 @@
  */
 include_once 'EstadoDao.php';
 
-class EstadoDaoImpl extends EstadoDao {
+class EstadoDaoImpl implements EstadoDao {
 
     //put your code here
     public static function IntToString($int) {

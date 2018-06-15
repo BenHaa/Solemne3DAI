@@ -31,27 +31,23 @@ class UsuarioDaoImpl implements UsuarioDao {
     }
 
     public static function LeerObjeto($id) {
-            $dto = new UsuarioDto();
+        $dto = new UsuarioDto();
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare('SELECT * FROM USUARIO WHERE RUT_PERSONA=? AND PASSWORD=?');
-            
-          
-            if($stmt->execute()){
-            
-                
-                $pdo=null;      
-                return true;
+            $stmt = $pdo->prepare('SELECT * FROM USUARIO WHERE RUT_PERSONA=?');
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+            $rs = $stmt->fetchAll();
+            foreach ($rs as $val) {
+                $dto->setIdPerfil($val["id_perfil"]);
+                $dto->setIdUsuario($val["id_usuario"]);
+                $dto->setRut($val["rut_persona"]);
+                return $dto;
             }
-                    
-            
-            
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
-            
-        
-        
+        return $dto;
     }
 
     public static function StringToInt($string) {
@@ -86,7 +82,6 @@ class UsuarioDaoImpl implements UsuarioDao {
     }
 
     public static function ComprobarUsuario($rut, $pass) {
-        $lista = new ArrayObject();
         try {
             $pdo = new clasePDO();
             $stmt = $pdo->prepare("SELECT * FROM USUARIO WHERE RUT_PERSONA=? AND PASSWORD=?");
@@ -94,8 +89,8 @@ class UsuarioDaoImpl implements UsuarioDao {
             $stmt->bindParam(1, $rut);
             $stmt->bindParam(2, $pass);
             $stmt->execute();
-            echo 'hola';
-            if ($stmt->rowCount() > 0) {
+            $rs = $stmt->fetchAll();
+            if (!empty($rs)) {
                 return true;
             }
         } catch (Exception $exc) {

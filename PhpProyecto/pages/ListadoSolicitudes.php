@@ -164,20 +164,21 @@ include_once '../dao/RentaDaoImpl.php';
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
+                                                <form action="../server/ActualizarSolicitud.php" method="POST">
                                         <div class="modal-body">
 
                                             <div class="widget">
 
-                                               
-                                                <fieldset>
-                                                    <legend>Select a Location: </legend>
-                                                    <label for="radio-1">Pendiente</label>
-                                                    <input type="radio" name="radio-1" id="radio-1">
-                                                    <label for="radio-2">Aprobar</label>
-                                                    <input type="radio" name="radio-1" id="radio-2">
-                                                    <label for="radio-3">Rechazar</label>
-                                                    <input type="radio" name="radio-1" id="radio-3">
-                                                </fieldset>
+                                                    <fieldset>
+                                                        <legend>Select a Location: </legend>
+                                                        <label for="radio-1">Pendiente</label>
+                                                        <input type="radio" name="radio-1" id="radio-1" value="2" >
+                                                        <label for="radio-2">Aprobar</label>
+                                                        <input type="radio" name="radio-1" id="radio-2" value="1">
+                                                        <label for="radio-3">Rechazar</label>
+                                                        <input type="radio" name="radio-1" id="radio-3" value="3">
+                                                    </fieldset>
+
                                             </div>
 
 
@@ -185,8 +186,9 @@ include_once '../dao/RentaDaoImpl.php';
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="submit " class="btn btn-primary">Save changes</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

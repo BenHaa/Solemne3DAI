@@ -26,7 +26,7 @@ interface SolicitudDao extends BaseDao, ConversionDao {
 
     public static function ExisteSolicitudPostulante($rut);
     
-    public static function ActualizarEstado($id_estado);
+    public static function ActualizarEstado($id_estado, $id_solicitud);
     
     
     

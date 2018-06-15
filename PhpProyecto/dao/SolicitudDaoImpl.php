@@ -244,11 +244,12 @@ class SolicitudDaoImpl implements SolicitudDao {
         }
     }
 
-    public static function ActualizarEstado($id_estado) {
+    public static function ActualizarEstado($id_estado, $id_solicitud) {
         try {
             $pdo = new clasePDO();
-            $stmt = $pdo->prepare("UPDATE POSTULACION SET ESTADO_SOLICITUD=?");
+            $stmt = $pdo->prepare("UPDATE POSTULACION SET ESTADO_SOLICITUD=? WHERE ID_SOLICITUD=?");
             $stmt->bindParam(1, $id_estado);
+            $stmt->bindParam(2, $id_solicitud);
             
         if($stmt->execute()){
             $pdo=null;

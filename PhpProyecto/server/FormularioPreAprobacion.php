@@ -18,9 +18,18 @@ include_once '../dao/EstadoCivilDaoImpl.php';
 include_once '../dao/SolicitudDaoImpl.php';
 
 //Si el rut no existe, se levanta la solicitud
-
+header('Content-Type: text/html; charset=utf-8');
 if (SolicitudDaoImpl::ExisteSolicitudPostulante($_POST["txtRut"])) {
-    echo '<script> alert("El postulante ya realizó una solicitud")';
+    echo "<SCRIPT type='text/javascript'> 
+        alert('El postulante ya realizó una solicitud');
+        window.location.replace('../pages/FormularioPreAprobacion.php');
+    </SCRIPT>";
+    
+    
+  //  echo '<script> alert("El postulante ya realizó una solicitud") </script>';
+
+
+    
 } else {
 
 

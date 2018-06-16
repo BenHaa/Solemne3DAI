@@ -48,7 +48,7 @@ include_once '../dao/RentaDaoImpl.php';
     <body>
         <?php
         $lista = SolicitudDaoImpl::listarSolicitudes();
-        $contador = 0;
+
         ?>
 
         <table border="1" >
@@ -63,7 +63,7 @@ include_once '../dao/RentaDaoImpl.php';
             <tbody>
                 <?php
                 foreach ($lista as $id) {
-                    $contador++;
+                   
                     //Se lee el objeto postulante a partir del id para desplegar sus datos en el modal de detalle
                     $dtoPostulante = PostulanteDaoImpl::LeerObjeto($id->getIdPostulante());
 
@@ -208,7 +208,7 @@ include_once '../dao/RentaDaoImpl.php';
                             <script>
                                 $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').click(function () {
                                     $.ajax({
-                                        data: {"idSolicitud": <?php echo $contador; ?>},
+                                        data: {"idSolicitud": <?php echo $id->getIdSolicitud(); ?>},
                                         method: "POST",
                                         url: '../server/FPAEliminarSolicitud.php',
                                         success: function () {

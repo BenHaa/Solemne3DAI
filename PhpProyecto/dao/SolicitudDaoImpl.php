@@ -160,23 +160,20 @@ class SolicitudDaoImpl implements SolicitudDao {
 
         try {
             $pdo = new clasePDO();
-            $query = "SELECT RUT_POSTULANTE as Rut,
-                CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
-                estado_solicitud as Estado 
-                from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)
-                join persona on (rut_postulante=rut) 
-                where rut_postulante=?";
+            $query = "SELECT estado_solicitud, fecha_registro, POSTULACION.id_postulante, id_solicitud FROM POSTULACION JOIN POSTULANTE ON POSTULACION.ID_POSTULANTE = POSTULANTE.ID_POSTULANTE
+            WHERE POSTULACION.ID_POSTULANTE = POSTULANTE.ID_POSTULANTE AND fecha_registro BETWEEN ? AND ? ";
             $stmt = $pdo->prepare($query);
-            $stmt->bindValue(1, $ini);
-            $stmt->bindValue(2, $fin);
+            $stmt->bindParam(1, $ini);
+            $stmt->bindParam(2, $fin);
 
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $solicitud) {
-                $dto = new SolicitudPorRutDto();
-                $dto->setRut($solicitud["Rut"]);
-                $dto->setNombre($solicitud["Nombre"]);
-                $dto->setEstado(EstadoDaoImpl::IntToString($solicitud["Estado"]));
+                $dto = new SolicitudDto();
+                $dto->setIdEstado($solicitud["estado_solicitud"]);
+                $dto->setFechaRegistro($solicitud["fecha_registro"]);
+                $dto->setIdPostulante($solicitud["id_postulante"]);
+                $dto->setIdSolicitud($solicitud["id_solicitud"]);
                 $lista->append($dto);
             }
             $pdo = null;
@@ -193,21 +190,20 @@ class SolicitudDaoImpl implements SolicitudDao {
         $lista = new ArrayObject();
         try {
             $pdo = new clasePDO();
-            $query = "SELECT RUT_POSTULANTE as Rut,
-                CONCAT_WS(' ',nombre, AP_PATERNO, AP_MATERNO) AS Nombre,
-                estado_solicitud as Estado 
-                from postulacion join postulante on (postulacion.id_postulante = postulante.id_postulante)
-                join persona on (rut_postulante=rut) 
-                where rut_postulante=?";
+            $query = "SELECT estado_solicitud, fecha_registro, POSTULACION.id_postulante, id_solicitud FROM POSTULACION JOIN POSTULANTE ON POSTULACION.ID_POSTULANTE = POSTULANTE.ID_POSTULANTE
+            WHERE POSTULACION.ID_POSTULANTE = POSTULANTE.ID_POSTULANTE AND POSTULANTE.RUT_POSTULANTE=?";
             $stmt = $pdo->prepare($query);
-            $stmt->bindValue(1, $rut);
+            $stmt->bindParam(1, $rut);
             $stmt->execute();
             $resultado = $stmt->fetchAll();
             foreach ($resultado as $solicitud) {
-                $dto = new SolicitudPorRutDto();
-                $dto->setRut($solicitud["Rut"]);
-                $dto->setNombre($solicitud["Nombre"]);
-                $dto->setEstado(EstadoDaoImpl::IntToString($solicitud["Estado"]));
+
+                $dto = new SolicitudDto();
+                $dto->setIdEstado($solicitud["estado_solicitud"]);
+                $dto->setFechaRegistro($solicitud["fecha_registro"]);
+                $dto->setIdPostulante($solicitud["id_postulante"]);
+                $dto->setIdSolicitud($solicitud["id_solicitud"]);
+
                 $lista->append($dto);
             }
             $pdo = null;
@@ -251,16 +247,13 @@ class SolicitudDaoImpl implements SolicitudDao {
             $stmt->bindParam(1, $id_estado);
             $stmt->bindParam(2, $id_solicitud);
             $stmt->execute();
-        if($stmt->rowCount()>0){
-            $pdo=null;
-            return true;
-            
-        }else{
-            $pdo=null;
-            return false;
-        }
-            
-
+            if ($stmt->rowCount() > 0) {
+                $pdo = null;
+                return true;
+            } else {
+                $pdo = null;
+                return false;
+            }
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }

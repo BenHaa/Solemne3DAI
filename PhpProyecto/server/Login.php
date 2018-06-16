@@ -17,7 +17,7 @@ if (isset($_POST["txtRut"]) & isset($_POST["txtPassword"])) {
         //session_commit();
         header('Location: ../pages/dashboard.php');
     } else {
-        echo "<script> alert('Usuario o contraseña incorrectos')";
+        echo "<script> alert('Usuario o contraseña incorrectos'); </script>";
         //header('Location: ../pages/Loginv2.php');
     }
 }

@@ -250,8 +250,8 @@ class SolicitudDaoImpl implements SolicitudDao {
             $stmt = $pdo->prepare("UPDATE POSTULACION SET ESTADO_SOLICITUD=? WHERE ID_SOLICITUD=?");
             $stmt->bindParam(1, $id_estado);
             $stmt->bindParam(2, $id_solicitud);
-            
-        if($stmt->execute()){
+            $stmt->execute();
+        if($stmt->rowCount()>0){
             $pdo=null;
             return true;
             
@@ -264,6 +264,7 @@ class SolicitudDaoImpl implements SolicitudDao {
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         }
+        return false;
     }
 
 }

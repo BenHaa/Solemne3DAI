@@ -1,5 +1,11 @@
 <?php 
 session_start();
+echo "Perfil ".$_SESSION["perfil"];
+if($_SESSION["perfil"]=='2'){
+    echo "<script>alert('bien')</script>";
+}else{
+    header('Location: ../pages/perfil1.php');
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,7 +56,7 @@ session_start();
                         <a href="dashboard.php" class="simple-text">
                             <?php
                             include_once '../dto/PersonaDto.php';
-                            $dto= $_SESSION["persona"];
+                            $dto = $_SESSION["persona"];
                             echo $dto;
                             ?>
                         </a>
@@ -58,9 +64,9 @@ session_start();
 
                     <ul class="nav">
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="FormularioPreAprobacion.php">
                                 <i class="pe-7s-graph"></i>
-                                <p>Dashboard</p>
+                                <p>Solicitar Credito</p>
                             </a>
                         </li>
                         <li>
@@ -193,7 +199,14 @@ session_start();
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            
+                            <?php
+                            echo "Perfil " . $_SESSION["perfil"];
+                            if ($_SESSION["perfil"] == '2') {
+                                echo "perfil bien";
+                            } else {
+                                header('Location: ../pages/perfil1.php');
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -205,7 +218,7 @@ session_start();
                             <ul>
                                 <li>
                                     <a href="#">
-                                        Home
+                                        Perfil2
                                     </a>
                                 </li>
                                 <li>

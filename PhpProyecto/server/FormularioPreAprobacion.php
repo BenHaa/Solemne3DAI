@@ -57,7 +57,11 @@ if (SolicitudDaoImpl::ExisteSolicitudPostulante($_POST["txtRut"])) {
     }
 
     $dtoPostulante->setEstadoCivil(EstadoCivilDaoImpl::StringToInt($_POST["cmbEstadoCivil"]));
-    $dtoPostulante->setHijos($_POST["txtHijos"]);
+    $hijos=0;
+    if(isset($_POST["txtHijos"])){
+        $hijos=$_POST["txtHijos"];
+    }
+    $dtoPostulante->setHijos($hijos);
     $dtoPostulante->setIdComuna(ComunaDaoImpl::StringToInt($_POST["txtComuna"]));
 //$dtoPostulante->setIdComuna(ComunaDaoImpl::StringToInt($_POST["cmbComuna"]));
     $dtoPostulante->setIdNivelEducacion(EducacionDaoImpl::StringToInt($_POST["cmbEducacion"]));

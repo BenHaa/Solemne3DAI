@@ -227,7 +227,8 @@ class SolicitudDaoImpl implements SolicitudDao {
             $stmt->bindParam(1, $rut);
 
             if ($stmt->execute()) {
-                if (!empty(($stmt->fetchAll()))) {
+                $lista = $stmt->fetchAll();                
+                if (!empty($lista)) {
                     $pdo = null;
                     return true;
                 } else {

@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 //echo "Perfil ".$_SESSION["perfil"];
 //if($_SESSION["perfil"]=='2'){
@@ -12,13 +12,6 @@ session_start();
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta charset="UTF-8">
-        <script src="../css/js/jquery331.js"></script>
-        <script src="../css/js/jquery.rut.js"></script>
-
-        <link rel="stylesheet" href="../css/style/bootstrap.css">
-
-
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
@@ -61,8 +54,13 @@ session_start();
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="Loginv2.php" class="simple-text">
-                            INICIAR SESION
+                        <a href="postulanteHome.php" class="simple-text">
+                            <?php
+                            
+                            include_once '../dto/PersonaDto.php';
+                            $dto= $_SESSION["persona"];
+                            echo $dto;
+                            ?>
                         </a>
                     </div>
 
@@ -70,10 +68,21 @@ session_start();
                         <li class="active">
                             <a href="postulanteHome.php">
                                 <i class="pe-7s-graph"></i>
-                                <p>REGISTRAR USUARIO</p>
+                                <p>Home</p>
                             </a>
                         </li>
-                        
+                        <li>
+                            <a href="user.html">
+                                <i class="pe-7s-user"></i>
+                                <p>User Profile</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="table.html">
+                                <i class="pe-7s-note2"></i>
+                                <p>Table List</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -83,16 +92,20 @@ session_start();
                     <div class="container-fluid">
                         <div class="navbar-header">
                             
+                            <a class="navbar-brand" href="#">Home</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a class="navbar-brand" href="RegistrarUsuario.php">registrar usuario</a>
-                                </li>
+                                
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-
+                                
+                                <li>
+                                    <a href="../server/CerrarSesion.php">
+                                        <p>Log out</p>
+                                    </a>
+                                </li>
                                 <li class="separator hidden-lg"></li>
                             </ul>
                         </div>
@@ -103,60 +116,7 @@ session_start();
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php
-                            if (isset($_SESSION["exito"])) {
-                                if ($_SESSION["exito"] == true) {
-                                    ?>
-                                    <script> alert('Se registró el usuario correctamente');</script>    
-                                <?php } else { ?>
-                                    <script> alert('No se registró el usuario');</script>    
-                                    <?php
-                                }
-                                unset($_SESSION["exito"]); //Se borra esta variable para que no despliegue la alerta cada vez que se quiera volver a esta página
-                            }
-                            ?>
-
-                            <form action="../server/RegistrarUsuario.php" method="POST">
-                                <table border="1" class="table" >
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2" style="text-align: center;">Formulario de Registro</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Rut</td>
-                                            <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nombre</td>
-                                            <td><input type="text" name="txtNombre" value="juan" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apellido Paterno</td>
-                                            <td><input type="text" name="txtApPaterno" value="lopez" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Apellido Materno</td>
-                                            <td><input type="text" name="txtApMaterno" value="garrido" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Contraseña</td>
-                                            <td><input type="text" name="txtContrasena" value="hola" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Repetir Contraseña</td>
-                                            <td><input type="text" name="txtContrasena2" value="hola" /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <br>
-                                <button type="submit" class="btn btn-primary offset-md-2">Grabar</button>
-                            </form>
-
-                            <script>
-                                $('#txtRut').rut({formatOn: 'keyup'});
-                            </script>
+                            
                         </div>
                     </div>
                 </div>
@@ -164,7 +124,7 @@ session_start();
 
                 <footer class="footer">
                     <div class="container-fluid">
-
+                        
                     </div>
                 </footer>
 
@@ -180,6 +140,18 @@ session_start();
 
     <!--  Charts Plugin -->
     <script src="../assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="../assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script src="../assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/demo.js"></script>
 
 <!--    <script type="text/javascript">
                                 $(document).ready(function () {
@@ -199,3 +171,4 @@ session_start();
     </script>-->
 
 </html>
+

@@ -1,5 +1,16 @@
 <?php
 include_once '../dao/ListasPostulanteDaoImp.php';
+if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
+            header('Location: ../pages/Loginv2.php');
+        } ELSE {
+            $perfil = $_SESSION["perfil"];
+            if ($perfil == '1') {
+                header('Location: ../pages/perfil1.php');
+            }
+            if ($perfil == '2') {
+                header('Location: ../pages/perfil2.php');
+            }
+        }
 ?>
 <html>
     <head>

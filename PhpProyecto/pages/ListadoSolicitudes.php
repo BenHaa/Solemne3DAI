@@ -227,6 +227,8 @@ include_once '../dao/RentaDaoImpl.php';
 
 
 
+                            
+                            
 
 
                         </td>

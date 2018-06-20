@@ -1,5 +1,5 @@
 <?php 
-//include_once '../dao/ListasPostulanteDaoImp.php';
+include_once '../dao/ListasPostulanteDaoImp.php';
 //if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
 //            header('Location: ../pages/Loginv2.php');
 //        } ELSE {
@@ -18,6 +18,7 @@
         <script src="../css/js/jquery331.js"></script>
         <script src="../css/js/jquery.rut.js"></script>
         <script src="../css/js/jquery-ui.js"></script>
+        <script src="../css/js/bootstrap.js"></script>
         <link rel="stylesheet" href="../css/style/bootstrap.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script>
@@ -182,6 +183,7 @@
                 <input type="submit" class="btn btn-primary" value="Postular">
 
             </form>
+            
         </div>
     </body>
 </html>

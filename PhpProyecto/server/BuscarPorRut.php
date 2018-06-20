@@ -13,7 +13,7 @@ if (!empty(($_POST["txtRut"]))) {
         session_start();
         $_SESSION["SolicitudesPorRut"] = $solicitudesPorRut;
         print_r($solicitudesPorRut);
-        //  header('Location: ../pages/SolicitudPorRutYFecha.php');
+          header('Location: ../pages/SolicitudPorRutYFecha.php');
     } else {
         echo "<script> alert('No hay solicitudes para dicho rut, verifique el rut que acaba de ingresar');
         window.location.replace(' ../pages/SolicitudPorRutYFecha.php');

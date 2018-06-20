@@ -33,7 +33,7 @@ class ListasPostulanteDaoImp implements Listados {
             $stmt->execute();
             $rs = $stmt->fetchAll();
             foreach ($rs as $educacion) {
-                $lista->append($educacion["descripcion"]);
+                $lista->append(utf8_encode($educacion["descripcion"]));
             }
             $clasePdo = null;
             return $lista;

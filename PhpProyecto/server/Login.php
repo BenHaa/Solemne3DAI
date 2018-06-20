@@ -17,11 +17,12 @@ if (isset($_POST["txtRut"]) & isset($_POST["txtPassword"])) {
         //session_commit();
         
         session_commit();
-        if ($perfil == '1') {
-                header('Location: ../pages/perfil1.php');
+      
+        if ($dto->getIdPerfil() == '1') {
+                header('Location: ../pages/postulanteHome.php');
             }
-            if ($perfil == '2') {
-                header('Location: ../pages/perfil2.php');
+            if ($dto->getIdPerfil() == '2') {
+                header('Location: ../pages/ejecutivoHome.php');
             }
         //header('Location: ../pages/dashboard.php');
     } else {

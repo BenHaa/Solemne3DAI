@@ -1,8 +1,9 @@
 <?php
 session_start();
 if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
-    
-} ELSE {
+   
+//Si la sesion es distinta de vacio
+} elseif (!empty($_SESSION["perfil"])) {
     $perfil = $_SESSION["perfil"];
     if ($perfil == '1') {
         header('Location: ../pages/perfil1.php');

@@ -64,14 +64,14 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-lg-4">&nbsp;&nbsp;</div>
-                            <div class="col-lg-4">
+                            <div class="col-xs-offset-4">&nbsp;&nbsp;</div>
+                            <div class="col-xs-offset-4">
                                 <form action="../server/BuscarPorRut.php" id="formConsultar">
                                     <table class="table-responsive">
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" id="txtRut" name="txtRut" placeholder="Rut" required>
+                                                    <input type="text" id="txtRut" name="txtRut" placeholder="Rut" required >
                                                 </td>
                                                 <td>
                                                     &nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Mi solicitud">
@@ -90,7 +90,7 @@
                                     </script>
                                 </form>
                             </div>
-                            <div class="col-lg-4"></div>
+                            <div class="col-xs-offset-4"></div>
                         </div>
 
                         <div class="row" id="consulta">

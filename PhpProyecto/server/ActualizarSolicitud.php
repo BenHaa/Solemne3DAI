@@ -16,14 +16,14 @@ if (isset($_POST["radio-1"]) && isset($_POST["idSolicitud"])) {
     if (SolicitudDaoImpl::ActualizarEstado($idEstado, $numSolicitud)) {
         echo "<script> 
         
-        window.location.replace('../pages/ListadoSolicitudes.php');
+        window.location.replace('../pages/probando2.php');
         alert('La solicitud se actualizó correctamente');
     </script>";
         
     } else {
         echo "<script> 
         alert('La solicitud no se pudo actualizar');
-        window.location.replace('../pages/ListadoSolicitudes.php');
+        window.location.replace('../pages/probando2.php');
     </script>";
     }
 }

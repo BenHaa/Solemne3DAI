@@ -78,7 +78,7 @@ class ComunaDaoImpl implements ComunaDao {
 
 
                 foreach ($resultado as $value) {
-                    $lista->append($value['descripcion']);
+                    $lista->append(utf8_encode($value['descripcion']));
                 }
                 $pdo = null;
             } else {

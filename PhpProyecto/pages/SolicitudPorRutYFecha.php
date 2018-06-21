@@ -144,8 +144,8 @@ if (isset($_SESSION["SolicitudesPorFecha"])) {
                                 <!-- Modal Ver Detalle-->
                                 <div class="modal fade " id="modalVer<?php echo $id->getIdSolicitud(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document" style="margin: 3.75rem auto;">
-                                        <div class="modal-content modal-lg" style="width: 700px; margin-left: -80px;
-                                             ">
+                                        <div class="modal-content modal-lg" style="width: 700px; margin-left: -80px;">
+                                         
                                             <div class="modal-header">
                                                 <h5 class="modal-title"  > Ficha Postulante</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -243,6 +243,7 @@ if (isset($_SESSION["SolicitudesPorFecha"])) {
                                                     </div>
 
                                                 </div>
+                                                
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                     <button type="submit " class="btn btn-primary">Save changes</button>
@@ -279,16 +280,6 @@ if (isset($_SESSION["SolicitudesPorFecha"])) {
                 <?php } ?>
             </tbody>
         </table>
-
-
-
-
-
-
-
-
-
-
 
 
     </body>

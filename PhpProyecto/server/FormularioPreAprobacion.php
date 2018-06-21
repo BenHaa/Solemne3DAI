@@ -24,12 +24,9 @@ if (SolicitudDaoImpl::ExisteSolicitudPostulante($_POST["txtRut"])) {
         alert('El postulante ya realizó una solicitud');
         window.location.replace('../pages/FormularioPreAprobacion.php');
     </SCRIPT>";
-    
-    
-  //  echo '<script> alert("El postulante ya realizó una solicitud") </script>';
 
 
-    
+    //  echo '<script> alert("El postulante ya realizó una solicitud") </script>';
 } else {
 
 
@@ -57,9 +54,9 @@ if (SolicitudDaoImpl::ExisteSolicitudPostulante($_POST["txtRut"])) {
     }
 
     $dtoPostulante->setEstadoCivil(EstadoCivilDaoImpl::StringToInt($_POST["cmbEstadoCivil"]));
-    $hijos=0;
-    if(isset($_POST["txtHijos"])){
-        $hijos=$_POST["txtHijos"];
+    $hijos = 0;
+    if (isset($_POST["txtHijos"])) {
+        $hijos = $_POST["txtHijos"];
     }
     $dtoPostulante->setHijos($hijos);
     $dtoPostulante->setIdComuna(ComunaDaoImpl::StringToInt($_POST["txtComuna"]));
@@ -71,14 +68,29 @@ if (SolicitudDaoImpl::ExisteSolicitudPostulante($_POST["txtRut"])) {
     $dtoPostulante->setTelefono($_POST["txtTelefono"]);
 
 
-    PostulanteDaoImpl::agregarObjeto($dtoPostulante);
+    if (PostulanteDaoImpl::agregarObjeto($dtoPostulante)) {
+        //Finalmente se genera la solicitud
+        $dtoSolicitud = new SolicitudDto();
+        $dtoSolicitud->setIdPostulante(PostulanteDaoImpl::RecuperarUltimoid());
+        $dtoSolicitud->setIdEstado(2); // Pendiente, por defecto
 
-//Finalmente se genera la solicitud
-    $dtoSolicitud = new SolicitudDto();
-    $dtoSolicitud->setIdPostulante(PostulanteDaoImpl::RecuperarUltimoid());
-    $dtoSolicitud->setIdEstado(2); // Pendiente, por defecto
-
-    SolicitudDaoImpl::agregarObjeto($dtoSolicitud);
+        if (SolicitudDaoImpl::agregarObjeto($dtoSolicitud)) {
+            echo "<script> 
+        alert('Se realizó la solicitud con éxito');
+        window.location.replace('../pages/probando2.php');
+    </script>";
+        } else {
+            echo "<SCRIPT type='text/javascript'> 
+        alert('No se pudo realizar la  solicitud');
+        window.location.replace('../pages/FormularioPreAprobacion.php');
+    </SCRIPT>";
+        }
+    } else {
+        echo "<SCRIPT type='text/javascript'> 
+        alert('No se pudo realizar la solicitud');
+        window.location.replace('../pages/FormularioPreAprobacion.php');
+    </SCRIPT>";
+    }
 }
 
 

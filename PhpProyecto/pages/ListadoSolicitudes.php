@@ -46,6 +46,7 @@ include_once '../dao/RentaDaoImpl.php';
         <title></title>
     </head>
     <body>
+        
         <?php
         $lista = SolicitudDaoImpl::listarSolicitudes();
 

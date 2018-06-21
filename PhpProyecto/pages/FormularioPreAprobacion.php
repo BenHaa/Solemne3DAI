@@ -1,26 +1,69 @@
-<?php 
+<?php
+session_start();
 include_once '../dao/ListasPostulanteDaoImp.php';
-//if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
-//            header('Location: ../pages/Loginv2.php');
-//        } ELSE {
-//            $perfil = $_SESSION["perfil"];
-//            if ($perfil == '1') {
-//                header('Location: ../pages/perfil1.php');
-//            }
-//            if ($perfil == '2') {
-//                header('Location: ../pages/perfil2.php');
-//            }
-//        }
+//echo "Perfil ".$_SESSION["perfil"];
+//if($_SESSION["perfil"]=='2'){
+//    echo "<script>alert('bien')</script>";
+//}else{
+//    header('Location: ../pages/perfil1.php');
+//}
 ?>
-<html>
+
+<!doctype html>
+<html lang="en">
     <head>
+
         <meta charset="UTF-8">
-        <script src="../css/js/jquery331.js"></script>
+
+
+        <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <title>Bienvenido</title>
+
+        <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+
+        <!-- Bootstrap core CSS     -->
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- Animation library for notifications   -->
+        <link href="../assets/css/animate.min.css" rel="stylesheet"/>
+
+        <!--  Light Bootstrap Table core CSS    -->
+
+        <!--     Fonts and icons     -->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+        <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+        <script src="../assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/light-bootstrap-dashboard.js"></script>
         <script src="../css/js/jquery.rut.js"></script>
         <script src="../css/js/jquery-ui.js"></script>
-        <script src="../css/js/bootstrap.js"></script>
-        <link rel="stylesheet" href="../css/style/bootstrap.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+        <style>
+            .form-control{
+                height: 33px;
+            }
+
+            .scrollable-menu{
+                height: auto;
+                max-height: 200px;
+                overflow-x: hidden;
+            }
+
+            td, th {
+                padding: 7px;
+            }
+
+        </style>
+
         <script>
             $(document).ready(function () {
                 var availableTags = new Array();
@@ -28,8 +71,8 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                     $('#txtComuna').bind("keyup", function (event) {
                         var data = {'txtComuna': $('#txtComuna').val()};
 
-                        $.getJSON('../server/probandoAutocomplete.php', data, function (res, est, jqXHR) {
-
+                        $.getJSON('../server/Autocomplete.php', data, function (res, est, jqXHR) {
+                            console.log(res);
                             availableTags.length = 0;
 
                             $.each(res, function (i, item) {
@@ -44,146 +87,252 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                     source: availableTags,
                     minLength: 1
                 });
+
+
+
             });
         </script>
 
-
-        <title>Formulario Solicitud</title>
     </head>
-
     <body>
-        <div class="container">
-            <div class="row"><br></div>
-            <form action=../server/FormularioPreAprobacion.php method="POST">
-                <div class="row centered">
 
-                    <table border="0" class="table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>Rut</td>
-                                <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" /></td>
-                                <td> &nbsp; Telefono</td>
-                                <td><input type="text" name="txtTelefono" value="6034690" /></td>
-                            </tr>
-                            <tr>
-                                <td>Nombre</td>
-                                <td><input type="text" name="txtNombre" value="nacho" /></td>
-                                <td> &nbsp; Email</td>
-                                <td><input type="email" name="txtEmail" value="nacho@gmail.com" /></td>
-                            </tr>
-                            <tr>
-                                <td>Apellido Paterno</td>
-                                <td><input type="text" name="txtApPat" value="perez" /></td>
-                                <td> &nbsp; Direccion</td>
-                                <td><input type="text" name="txtDireccion" value="loquesea#381" /></td>
-                            </tr>
-                            <tr>
-                                <td>Apellido Materno</td>
-                                <td><input type="text" name="txtApMat" value="cumillaf" /></td>
-                                <td> &nbsp;&nbsp;Comuna</td>
-                                <td>
-                                    <input type="text" name="txtComuna" id="txtComuna" value="Santiago" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fecha Nacimineto</td>
-                                <td><input type="date" name="fechaNac" value="" /></td>
-                                <td> &nbsp;&nbsp;Educacion</td>
-                                <td>
-                                    <select name="cmbEducacion">
-                                        <?php
-                                        $listaNivelEducacion = ListasPostulanteDaoImp::listarEducacion();
-                                        foreach ($listaNivelEducacion as $value) {
-                                            echo "<option>" . $value . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;&nbsp;Sexo</td>
-                                <td>
-                                    
-                                    <select name="cmbSexo">
-                                        <?php
-                                        $listaNivelEducacione = ListasPostulanteDaoImp::listarSexo();
-                                        foreach ($listaNivelEducacione as $value) {
-                                            echo "<option>" . $value . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    
-                                </td>
-                                <td>&nbsp;&nbsp;Renta</td>
-                                <td>
-                                    <select name="cmbRenta">
-                                        <?php
-                                        $listaRenta = ListasPostulanteDaoImp::listarRenta();
-                                        foreach ($listaRenta as $value) {
-                                            echo "<option>" . $value . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Estado Civil</td>
-                                <td>
-                                    <select name="cmbEstadoCivil">
+        <div class="wrapper">
+            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-5.jpg">
 
-                                        <?php
-                                        $listaEstadoCivil = ListasPostulanteDaoImp::listarEstadoCivil();
-                                        foreach ($listaEstadoCivil as $value) {
-                                            echo "<option>" . $value . "</option>";
-                                        }
-                                        ?>
-                                        
-
-                                    </select>
-                                </td>
-                                <td>&nbsp;&nbsp;Sueldo Liquido</td>
-                                <td><input type="number" name="txtSueldo" value="650000" /></td>
-                            </tr>
-                            <tr>
-                                <td>Hijos</td>
-                                <td><input type="checkbox" name="chkHijos" id="chkHijos" value="ON"/>&nbsp;
-                                    Cantidad <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px"   value="2" disabled/>
-                                </td>
-                                <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
-                                <td>
-                                    <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
-
-
-
-
-
-                                </td>
-                            </tr>
-                        </tbody>
-
-
-                        <script>
-                            $('#txtRut').rut({formatOn: 'keyup'});
-
-                            $('#chkHijos').click(function () {
-
-                                if ($('#txtHijos').prop('disabled')) {
-                                    $('#txtHijos').prop('disabled', false);
-
-                                } else {
-                                    $('#txtHijos').prop('disabled', true);
-                                    $('#txtHijos').val('');
-                                }
-
-                            });
-
-                        </script>
-                    </table>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Postular">
-
-            </form>
+                <!--
             
+                    Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+                    Tip 2: you can also add an image using data-image tag
+            
+                -->
+
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a href="Loginv2.php" class="simple-text">
+                            INICIAR SESION
+                        </a>
+                    </div>
+
+                    <ul class="nav">
+                        <li class="active">
+                            <a href="postulanteHome.php">
+                                <i class="pe-7s-graph"></i>
+                                <p>Solicitar Crédito</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <nav class="navbar navbar-default navbar-fixed">
+                 
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-left">
+                                <li>
+                                    <a class="navbar-brand" href="RegistrarUsuario.php">Realizar Solicitud</a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <li class="separator hidden-lg"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="content col-xs-offset-1" style="margin-left: 130px;">
+                    <div class="container-fluid">
+                        <br>
+                       
+                        <form action=../server/FormularioPreAprobacion.php method="POST">
+                            <div class="row">
+
+                                <table border="0" class="table-bordered table-hover table-striped" style="width: 790px;" >
+
+                                    <tbody>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="4" style="text-align: center"> Registrar</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tr >
+                                        <td>&nbsp;Rut</td>
+                                        <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" class="form-control" maxlength="12" /></td>
+                                        <td> &nbsp; Telefono</td>
+                                        <td><input type="text" name="txtTelefono" value="6034690" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Nombre</td>
+                                        <td><input type="text" name="txtNombre" value="nacho" class="form-control" /></td>
+                                        <td> &nbsp; Email</td>
+                                        <td><input type="email" name="txtEmail" value="nacho@gmail.com" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Apellido Paterno</td>
+                                        <td><input type="text" name="txtApPat" value="perez" class="form-control" /></td>
+                                        <td> &nbsp; Direccion</td>
+                                        <td><input type="text" name="txtDireccion" value="loquesea#381" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Apellido Materno</td>
+                                        <td><input type="text" name="txtApMat" value="cumillaf" class="form-control"/></td>
+                                        <td> &nbsp;&nbsp;Comuna</td>
+                                        <td>
+                                            <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Fecha Nacimiento</td>
+                                        <td><input type="date" name="fechaNac" value="" class="form-control" /></td>
+                                        <td> &nbsp;&nbsp;Educacion</td>
+                                        <td>
+                                            <select name="cmbEducacion" class="form-control">
+                                                <?php
+                                                $listaNivelEducacion = ListasPostulanteDaoImp::listarEducacion();
+                                                foreach ($listaNivelEducacion as $value) {
+                                                    echo "<option>" . $value . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Sexo</td>
+                                        <td>
+
+                                            <select name="cmbSexo" class="form-control">
+                                                <?php
+                                                $listaSexo = ListasPostulanteDaoImp::listarSexo();
+                                                foreach ($listaSexo as $value) {
+                                                    if ($value != "No Indica") {
+                                                        echo "<option>" . $value . "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+
+
+                                        </td>
+                                        <td>&nbsp;&nbsp;Renta</td>
+                                        <td>
+                                            <select name="cmbRenta" class="form-control">
+                                                <?php
+                                                $listaRenta = ListasPostulanteDaoImp::listarRenta();
+                                                foreach ($listaRenta as $value) {
+                                                    echo "<option>" . $value . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>&nbsp;Estado Civil</td>
+                                        <td>
+
+                                            <select name="cmbEstadoCivil" class="form-control">
+                                                <?php
+                                                $listaEstadoCivil = ListasPostulanteDaoImp::listarEstadoCivil();
+                                                foreach ($listaEstadoCivil as $value) {
+                                                    echo "<option>" . $value . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+
+
+                                        </td>
+                                        <td>&nbsp;&nbsp;Sueldo Liquido</td>
+                                        <td><input type="number" name="txtSueldo" value="650000" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Hijos</td>
+                                        <td>
+                                            <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px"   value="2" disabled class="form-control"/>
+                                            <input type="checkbox" name="chkHijos" id="chkHijos" value="ON">
+                                        </td>
+                                        <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
+                                        <td>
+                                            &nbsp; <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
+
+
+
+
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+
+                                    <script>
+                                        $('#txtRut').rut({formatOn: 'keyup'});
+
+                                        $('#chkHijos').click(function () {
+
+                                            if ($('#txtHijos').prop('disabled')) {
+                                                $('#txtHijos').prop('disabled', false);
+
+                                            } else {
+                                                $('#txtHijos').prop('disabled', true);
+                                                $('#txtHijos').val('');
+                                            }
+
+                                        });
+
+                                    </script>
+                                </table>
+
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-lg" style="margin-left: 330px;">Postular</button>
+                        </form>
+
+                    </div>
+                </div>
+
+
+                <footer class="footer">
+                    <div class="container-fluid">
+
+                    </div>
+                </footer>
+
+            </div>
         </div>
+
+
+
+
+
+
+
     </body>
+
+
+
+<!--    <script type="text/javascript">
+                                $(document).ready(function () {
+
+                                    demo.initChartist();
+
+                                    $.notify({
+                                        icon: 'pe-7s-gift',
+                                        message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
+
+                                    }, {
+                                        type: 'info',
+                                        timer: 4000
+                                    });
+
+                                });
+    </script>-->
+
 </html>

@@ -13,14 +13,14 @@ if (!empty(($_POST["txtRut"]))) {
         session_start();
         $_SESSION["SolicitudesPorRut"] = $solicitudesPorRut;
         print_r($solicitudesPorRut);
-          header('Location: ../pages/SolicitudPorRutYFecha.php');
+          header('Location: ../pages/probando2.php');
     } else {
         echo "<script> alert('No hay solicitudes para dicho rut, verifique el rut que acaba de ingresar');
-        window.location.replace(' ../pages/SolicitudPorRutYFecha.php');
+        window.location.replace(' ../pages/probando2.php');
          </script>";
     }
 } else {
     echo "<script> alert('Por favor, digite un rut válido');
-        window.location.replace(' ../pages/SolicitudPorRutYFecha.php');
+        window.location.replace(' ../pages/probando2.php');
          </script>";
 }

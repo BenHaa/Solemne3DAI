@@ -1,4 +1,5 @@
 <?php
+include_once '../dto/PersonaDto.php';
 session_start();
 //echo "Perfil ".$_SESSION["perfil"];
 //if($_SESSION["perfil"]=='2'){
@@ -52,37 +53,29 @@ session_start();
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-                <!--
-            
-                    Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-                    Tip 2: you can also add an image using data-image tag
-            
-                -->
+            <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-5.jpg">
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="postulanteHome.php" class="simple-text">
                             <?php
-                            include_once '../dto/PersonaDto.php';
-                            $dto = $_SESSION["persona"];
+                            $dto= $_SESSION["persona"];
                             echo $dto;
                             ?>
                         </a>
                     </div>
 
                     <ul class="nav">
-                        <li class="active">
-                            <a href="postulanteHome.php">
-                                <i class="pe-7s-graph"></i>
-                                <p>Home</p>
-                            </a>
-                        </li>
                         <li>
                             <a href="FormularioPreAprobacion.php">
                                 <i class="pe-7s-note2"></i>
-                                <p>Mis Solicitudes</p>
+                                <p>Solicitar Crédito</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="estadoSolicitud.php">
+                                <i class="pe-7s-angle-right"></i>
+                                <p>Estado Solicitud</p>
                             </a>
                         </li>
                     </ul>
@@ -118,9 +111,9 @@ session_start();
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-
-
-
+                            <h3>
+                                Bienvenido <?php echo $_SESSION["persona"]?>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -145,25 +138,8 @@ session_start();
 
     <!--  Charts Plugin -->
     <script src="../assets/js/chartist.min.js"></script>
+    <script src="../assets/js/light-bootstrap-dashboard.js"></script>
 
-
-
-<!--    <script type="text/javascript">
-                                $(document).ready(function () {
-
-                                    demo.initChartist();
-
-                                    $.notify({
-                                        icon: 'pe-7s-gift',
-                                        message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-                                    }, {
-                                        type: 'info',
-                                        timer: 4000
-                                    });
-
-                                });
-    </script>-->
 
 </html>
 

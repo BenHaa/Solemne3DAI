@@ -6,10 +6,10 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
 } elseif (!empty($_SESSION["perfil"])) {
     $perfil = $_SESSION["perfil"];
     if ($perfil == '1') {
-        header('Location: ../pages/perfil1.php');
+        header('Location: ../pages/postulanteHome.php');
     }
     if ($perfil == '2') {
-        header('Location: ../pages/perfil2.php');
+        header('Location: ../pages/ejecutivoHome.php');
     }
 }
 ?>

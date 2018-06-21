@@ -14,6 +14,10 @@ if (isset($_POST["txtRut"]) & isset($_POST["txtPassword"])) {
         $_SESSION["perfil"] = $dto->getIdPerfil();
         $persona = PersonaDaoImpl::LeerObjeto($_POST["txtRut"]);
         $_SESSION["persona"] = $persona->getNombre() . ' ' . $persona->getApellido_pat() . ' ' . $persona->getApellido_mat();
+        $_SESSION["nombre"]=$persona->getNombre();
+        $_SESSION["apellidoP"]=$persona->getApellido_pat();
+        $_SESSION["apellidoM"]=$persona->getApellido_mat();
+        $_SESSION["rut"] = $persona->getRut();
         //session_commit();
         
         session_commit();

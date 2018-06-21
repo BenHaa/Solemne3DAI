@@ -12,6 +12,7 @@
  * @author Ignacio
  */
 include_once 'EstadoDao.php';
+include_once '../sql/ClasePDO.php';
 
 class EstadoDaoImpl implements EstadoDao {
 

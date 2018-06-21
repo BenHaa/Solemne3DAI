@@ -1,6 +1,7 @@
 <?php
-session_start();
 include_once '../dao/ListasPostulanteDaoImp.php';
+session_start();
+
 //echo "Perfil ".$_SESSION["perfil"];
 //if($_SESSION["perfil"]=='2'){
 //    echo "<script>alert('bien')</script>";
@@ -108,18 +109,28 @@ include_once '../dao/ListasPostulanteDaoImp.php';
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="Loginv2.php" class="simple-text">
-                            INICIAR SESION
+                        <a class="simple-text" href="postulanteHome.php">
+                            <?php
+                            $dto= $_SESSION["persona"];
+                            echo $dto;
+                            ?>
                         </a>
                     </div>
 
                     <ul class="nav">
                         <li class="active">
-                            <a href="postulanteHome.php">
+                            <a href="FormularioPreAprobacion.php">
                                 <i class="pe-7s-graph"></i>
                                 <p>Solicitar Crédito</p>
                             </a>
                         </li>
+                        <li class="">
+                            <a href="estadoSolicitud.php">
+                                <i class="pe-7s-angle-right"></i>
+                                <p>Estado Solicitud</p>
+                            </a>
+                        </li>
+                        
 
                     </ul>
                 </div>
@@ -127,20 +138,24 @@ include_once '../dao/ListasPostulanteDaoImp.php';
 
             <div class="main-panel">
                 <nav class="navbar navbar-default navbar-fixed">
-                 
+
                     <div class="container-fluid">
                         <div class="navbar-header">
-
+                            
+                            <a class="navbar-brand" href="#">Solicitar Crédito</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a class="navbar-brand" href="RegistrarUsuario.php">Realizar Solicitud</a>
-                                </li>
+                                
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-
+                                
+                                <li>
+                                    <a href="../server/CerrarSesion.php">
+                                        <p>Log out</p>
+                                    </a>
+                                </li>
                                 <li class="separator hidden-lg"></li>
                             </ul>
                         </div>
@@ -150,7 +165,7 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                 <div class="content col-xs-offset-1" style="margin-left: 130px;">
                     <div class="container-fluid">
                         <br>
-                       
+
                         <form action=../server/FormularioPreAprobacion.php method="POST">
                             <div class="row">
 
@@ -166,25 +181,25 @@ include_once '../dao/ListasPostulanteDaoImp.php';
 
                                     <tr >
                                         <td>&nbsp;Rut</td>
-                                        <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" class="form-control" maxlength="12" /></td>
+                                        <td><input type="text" name="txtRut" id="txtRut" value="<?php echo $_SESSION["rut"];?>" class="form-control" maxlength="12" disabled/></td>
                                         <td> &nbsp; Telefono</td>
                                         <td><input type="text" name="txtTelefono" value="6034690" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Nombre</td>
-                                        <td><input type="text" name="txtNombre" value="nacho" class="form-control" /></td>
+                                        <td><input type="text" name="txtNombre" value="<?php echo $_SESSION["nombre"];?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Email</td>
                                         <td><input type="email" name="txtEmail" value="nacho@gmail.com" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Paterno</td>
-                                        <td><input type="text" name="txtApPat" value="perez" class="form-control" /></td>
+                                        <td><input type="text" name="txtApPat" value="<?php echo $_SESSION["apellidoP"];?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Direccion</td>
                                         <td><input type="text" name="txtDireccion" value="loquesea#381" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Materno</td>
-                                        <td><input type="text" name="txtApMat" value="cumillaf" class="form-control"/></td>
+                                        <td><input type="text" name="txtApMat" value="<?php echo $_SESSION["apellidoM"];?>" class="form-control" disabled/></td>
                                         <td> &nbsp;&nbsp;Comuna</td>
                                         <td>
                                             <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control"/>
@@ -256,17 +271,14 @@ include_once '../dao/ListasPostulanteDaoImp.php';
                                     <tr>
                                         <td>&nbsp;Hijos</td>
                                         <td>
-                                            <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px"   value="2" disabled class="form-control"/>
-                                            <input type="checkbox" name="chkHijos" id="chkHijos" value="ON">
+                                            <div>
+                                                &nbsp;<input type="checkbox" name="chkHijos" id="chkHijos" value="ON" style="float: left;">  
+                                                <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px; float: left; margin: auto "   value="2" disabled class="form-control"/>
+                                            </div>
                                         </td>
                                         <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
                                         <td>
                                             &nbsp; <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
-
-
-
-
-
                                         </td>
                                     </tr>
                                     </tbody>

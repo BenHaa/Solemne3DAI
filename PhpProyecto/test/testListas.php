@@ -7,21 +7,12 @@ include_once '../dao/SexoDaoImpl.php';
 include_once '../dao/EducacionDaoImpl.php';
 include_once '../dao/SolicitudDaoImpl.php';
 include_once '../dao/ComunaDaoImpl.php';
+include_once '../dao/EstadoDaoImpl.php';
 
-foreach (ListasPostulanteDaoImp::listarEducacion() as $value) {
-    echo "<h1>" . $value . "</h1>";
+$das = SolicitudDaoImpl::BuscarPorRut("19.360.198-7");
+foreach ($das as $val){
+    echo EstadoDaoImpl::IntToString($val->getIdEstado());
 }
-
-$dto = new PostulanteDto();
-
-$dto = PostulanteDaoImpl::LeerObjeto(1);
-
-
-$plop = ComunaDaoImpl::AutoCompletadoComuna('P');
-foreach ($plop as $value) {
-    echo $value;
-}
-
 
 
 

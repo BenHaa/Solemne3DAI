@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 //echo "Perfil ".$_SESSION["perfil"];
 //if($_SESSION["perfil"]=='2'){
@@ -39,6 +39,16 @@ session_start();
         <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
 
     </head>
+    
+    <style>
+        
+        #exampleModal .modal-background{
+            display:none;
+            
+        }
+        
+    </style>
+    
     <body>
 
         <div class="wrapper">
@@ -55,9 +65,8 @@ session_start();
                     <div class="logo">
                         <a href="postulanteHome.php" class="simple-text">
                             <?php
-                            
                             include_once '../dto/PersonaDto.php';
-                            $dto= $_SESSION["persona"];
+                            $dto = $_SESSION["persona"];
                             echo $dto;
                             ?>
                         </a>
@@ -84,16 +93,16 @@ session_start();
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            
+
                             <a class="navbar-brand" href="#">Home</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                
+
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                
+
                                 <li>
                                     <a href="../server/CerrarSesion.php">
                                         <p>Log out</p>
@@ -109,7 +118,9 @@ session_start();
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            
+
+
+
                         </div>
                     </div>
                 </div>
@@ -117,13 +128,14 @@ session_start();
 
                 <footer class="footer">
                     <div class="container-fluid">
-                        
+
                     </div>
                 </footer>
 
             </div>
         </div>
-
+        
+        
 
     </body>
 
@@ -134,7 +146,7 @@ session_start();
     <!--  Charts Plugin -->
     <script src="../assets/js/chartist.min.js"></script>
 
-   
+
 
 <!--    <script type="text/javascript">
                                 $(document).ready(function () {

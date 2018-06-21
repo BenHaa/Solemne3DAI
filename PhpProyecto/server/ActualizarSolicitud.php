@@ -14,16 +14,26 @@ if (isset($_POST["radio-1"]) && isset($_POST["idSolicitud"])) {
     $numSolicitud = $_POST["idSolicitud"];
 
     if (SolicitudDaoImpl::ActualizarEstado($idEstado, $numSolicitud)) {
+        session_start();
+        if (!empty($_SESSION["SolicitudesPorRut"])) {
+       
+            $solicitudesPorRut = SolicitudDaoImpl::BuscarPorRut($_SESSION["rut"]);
+            $_SESSION["SolicitudesPorRut"] = $solicitudesPorRut;
+        }
+        if (!empty($_SESSION["SolicitudesPorFecha"])) {
+
+            $solicitudesPorFecha = SolicitudDaoImpl::BuscarPorFecha($_SESSION["inicio"], $_SESSION["fin"]);
+            $_SESSION["SolicitudesPorFecha"] = $solicitudesPorFecha;
+        }
+
         echo "<script> 
-        
-        window.location.replace('../pages/probando2.php');
+        window.location.replace('../pages/SolicitudPorRutYFecha.php');
         alert('La solicitud se actualizó correctamente');
     </script>";
-        
     } else {
         echo "<script> 
         alert('La solicitud no se pudo actualizar');
-        window.location.replace('../pages/probando2.php');
+        window.location.replace('../pages/SolicitudPorRutYFecha.php');
     </script>";
     }
 }

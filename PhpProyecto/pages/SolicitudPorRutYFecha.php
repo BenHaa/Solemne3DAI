@@ -182,7 +182,7 @@ session_start();
 
                                         <tr>
                                             <td style="padding: 7px;">Rut</td>
-                                            <td style="padding: 7px;"><input type="text" name="txtRut" value=""  class="form-control"/></td>
+                                            <td style="padding: 7px;"><input type="text" name="txtRut" id="txtRut" value=""  class="form-control"/></td>
 
                                         </tr>
                                         <tr>
@@ -448,6 +448,12 @@ if (isset($_SESSION["SolicitudesPorFecha"])) {
 
                 <?php } ?>
             <?php } ?>
+
+
+            <script>
+                $('#txtRut').rut({formatOn: 'keyup'});
+            </script>
+
 
         </div>
     </body>

@@ -194,26 +194,26 @@ session_start();
                                         <td>&nbsp;Rut</td>
                                         <td><input type="text" name="txtRut" id="txtRut" value="<?php echo $_SESSION["rut"]; ?>" class="form-control" maxlength="12" disabled/></td>
                                         <td> &nbsp; Telefono</td>
-                                        <td><input type="text" name="txtTelefono" value="6034690" class="form-control" /></td>
+                                        <td><input type="text" name="txtTelefono" value="6034690" class="form-control"  required/></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Nombre</td>
                                         <td><input type="text" name="txtNombre" value="<?php echo $_SESSION["nombre"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Email</td>
-                                        <td><input type="email" name="txtEmail" value="nacho@gmail.com" class="form-control" /></td>
+                                        <td><input type="email" name="txtEmail" value="nacho@gmail.com" class="form-control" required /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Paterno</td>
                                         <td><input type="text" name="txtApPat" value="<?php echo $_SESSION["apellidoP"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Direccion</td>
-                                        <td><input type="text" name="txtDireccion" value="loquesea#381" class="form-control" /></td>
+                                        <td><input type="text" name="txtDireccion" value="loquesea#381" class="form-control" required/></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Materno</td>
                                         <td><input type="text" name="txtApMat" value="<?php echo $_SESSION["apellidoM"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp;&nbsp;Comuna</td>
                                         <td>
-                                            <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control" placeholder="Autcompletado Ajax"/>
+                                            <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control" placeholder="Autcompletado Ajax" required/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -282,7 +282,7 @@ session_start();
 
                                         </td>
                                         <td>&nbsp;&nbsp;Sueldo Liquido</td>
-                                        <td><input type="number" name="txtSueldo" value="650000" class="form-control" /></td>
+                                        <td><input type="number" name="txtSueldo" value="650000" class="form-control" required /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Hijos</td>

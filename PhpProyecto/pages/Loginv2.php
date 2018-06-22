@@ -40,9 +40,6 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../css/js/jquery.rut.js"></script>
 
-        <script>
-            $('#txtRut').rut({formatOn: 'keyup'});
-        </script>
 
 
 
@@ -62,7 +59,7 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Rut requerido">
-                            <input class="input100" type="text" name="txtRut" placeholder="&nbsp;Rut" >
+                            <input class="input100" type="text" name="txtRut" placeholder="&nbsp;Rut"id="txtRut" >
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-id-card" aria-hidden="true"></i>
@@ -71,7 +68,7 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
 
 
                         <div class="wrap-input100 validate-input" data-validate = "Contraseña requerida">
-                            <input class="input100" type="password" name="txtPassword" placeholder="Contraseña" value="hola">
+                            <input class="input100" type="password" name="txtPassword" placeholder="Contraseña" value="hola" maxlength="12">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -103,6 +100,9 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
             </div>
         </div>
 
+        <script>
+            $('#txtRut').rut({formatOn: 'keyup'});
+        </script>
 
 
 

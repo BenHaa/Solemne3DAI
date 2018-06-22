@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_NONE) {
-   
+
 //Si la sesion es distinta de vacio
 } elseif (!empty($_SESSION["perfil"])) {
     $perfil = $_SESSION["perfil"];
@@ -35,6 +35,17 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
         <link rel="stylesheet" type="text/css" href="../assets/css/util.css">
         <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
         <!--===============================================================================================-->
+
+        <script src="../assets/js/jquery331.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../css/js/jquery.rut.js"></script>
+
+        <script>
+            $('#txtRut').rut({formatOn: 'keyup'});
+        </script>
+
+
+
     </head>
     <body>
 
@@ -51,12 +62,13 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Rut requerido">
-                            <input class="input100" type="text" name="txtRut" placeholder="&nbsp;Rut" value="19.360.198-7">
+                            <input class="input100" type="text" name="txtRut" placeholder="&nbsp;Rut" >
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fa fa-id-card" aria-hidden="true"></i>
                             </span>
                         </div>
+
 
                         <div class="wrap-input100 validate-input" data-validate = "Contraseña requerida">
                             <input class="input100" type="password" name="txtPassword" placeholder="Contraseña" value="hola">
@@ -106,7 +118,7 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
         <script >
             $('.js-tilt').tilt({
                 scale: 1.1
-            })
+            });
         </script>
         <!--===============================================================================================-->
         <script src="../assets/js/main.js"></script>

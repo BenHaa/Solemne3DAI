@@ -14,9 +14,7 @@ session_start();
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
-
-        <script src="../css/js/jquery331.js"></script>
-        <script src="../css/js/jquery.rut.js"></script>
+        <link href="../assets/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
         <!-- Bootstrap core CSS     -->
         <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -25,16 +23,21 @@ session_start();
         <link href="../assets/css/animate.min.css" rel="stylesheet"/>
 
         <!--  Light Bootstrap Table core CSS    -->
-        <link href="../assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
-
-        <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="../assets/css/demo.css" rel="stylesheet" />
-
 
         <!--     Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
         <link href="../assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+        <script src="../assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+        <script src="../assets/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../assets/js/light-bootstrap-dashboard.js"></script>
+        <script src="../css/js/jquery.rut.js"></script>
+        <script src="../css/js/jquery-ui.js"></script>
+
 
     </head>
     <body>
@@ -53,14 +56,14 @@ session_start();
 
                     <ul class="nav">
                         <li >
-                            <a href="postulanteHome.php">
-                                <i class="pe-7s-graph"></i>
+                            <a href="FormularioPreAprobacion.php">
+                                <i class="pe-7s-note2"></i>
                                 <p>Solicitar Crédito</p>
                             </a>
                         </li>
                         <li class="active">
                             <a href="estadoSolicitud.php">
-                                <i class="pe-7s-angle-right"></i>
+                                <i class="pe-7s-news-paper"></i>
                                 <p>Estado Solicitud</p>
                             </a>
                         </li>
@@ -72,16 +75,16 @@ session_start();
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            
+
                             <a class="navbar-brand" href="#">Estado Solicitud</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                
+
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                
+
                                 <li>
                                     <a href="../server/CerrarSesion.php">
                                         <p>Log out</p>
@@ -103,7 +106,7 @@ session_start();
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" id="txtRut" name="txtRut" placeholder="Rut" required value="<?php echo trim($_SESSION["rut"]); ?>">
+                                                    <input type="text" id="txtRut" name="txtRut" placeholder="Rut" required value="<?php echo trim($_SESSION["rut"]); ?>" disabled>
                                                 </td>
                                                 <td>
                                                     &nbsp;&nbsp;<input type="submit" class="btn btn-primary" value="Mi solicitud">
@@ -137,6 +140,9 @@ session_start();
             </div>
         </div>
 
+        <script>
+            $('#txtRut').rut({formatOn: 'keyup'});
+        </script>
 
     </body>
 

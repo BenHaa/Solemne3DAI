@@ -18,7 +18,7 @@ if (!empty($_POST["clnDesde"]) && !empty($_POST["clnHasta"])) {
         $_SESSION["fin"] = $fin;
         
         
-            header('Location: ../pages/probando2.php');
+            header('Location: ../pages/SolicitudPorRutYFecha.php');
             
             if(!empty($_SESSION["SolicitudesPorRut"])){
                 session_unset($_SESSION["SolicitudesPorRut"]);

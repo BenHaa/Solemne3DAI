@@ -22,7 +22,7 @@ if (!empty(($_POST["txtRut"]))) {
         }
 
 
-        header('Location: ../pages/probando2.php');
+        header('Location: ../pages/SolicitudPorRutYFecha.php');
     } else {
         echo "<script> alert('No hay solicitudes para dicho rut, verifique el rut que acaba de ingresar');
         window.location.replace(' ../pages/SolicitudPorRutYFecha.php');

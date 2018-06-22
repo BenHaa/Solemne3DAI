@@ -74,7 +74,7 @@ session_start();
                         </li>
                         <li >
                             <a href="estadoSolicitud.php">
-                                <i class="pe-7s-angle-right"></i>
+                                <i class="pe-7s-news-paper"></i>
                                 <p>Estado Solicitud</p>
                             </a>
                         </li>

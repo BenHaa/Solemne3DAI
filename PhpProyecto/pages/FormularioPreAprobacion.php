@@ -63,6 +63,17 @@ session_start();
                 padding: 7px;
             }
 
+            input[type=checkbox]
+            {
+                /* Double-sized Checkboxes */
+                -ms-transform: scale(2); /* IE */
+                -moz-transform: scale(2); /* FF */
+                -webkit-transform: scale(2); /* Safari and Chrome */
+                -o-transform: scale(2); /* Opera */
+                padding: 10px;
+            }
+
+
         </style>
 
         <script>
@@ -111,7 +122,7 @@ session_start();
                     <div class="logo">
                         <a class="simple-text" href="postulanteHome.php">
                             <?php
-                            $dto= $_SESSION["persona"];
+                            $dto = $_SESSION["persona"];
                             echo $dto;
                             ?>
                         </a>
@@ -120,17 +131,17 @@ session_start();
                     <ul class="nav">
                         <li class="active">
                             <a href="FormularioPreAprobacion.php">
-                                <i class="pe-7s-graph"></i>
+                                <i class="pe-7s-note2"></i>
                                 <p>Solicitar Crédito</p>
                             </a>
                         </li>
                         <li class="">
                             <a href="estadoSolicitud.php">
-                                <i class="pe-7s-angle-right"></i>
+                                <i class="pe-7s-news-paper"></i>
                                 <p>Estado Solicitud</p>
                             </a>
                         </li>
-                        
+
 
                     </ul>
                 </div>
@@ -141,16 +152,16 @@ session_start();
 
                     <div class="container-fluid">
                         <div class="navbar-header">
-                            
+
                             <a class="navbar-brand" href="#">Solicitar Crédito</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-left">
-                                
+
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
-                                
+
                                 <li>
                                     <a href="../server/CerrarSesion.php">
                                         <p>Log out</p>
@@ -181,28 +192,28 @@ session_start();
 
                                     <tr >
                                         <td>&nbsp;Rut</td>
-                                        <td><input type="text" name="txtRut" id="txtRut" value="<?php echo $_SESSION["rut"];?>" class="form-control" maxlength="12" disabled/></td>
+                                        <td><input type="text" name="txtRut" id="txtRut" value="<?php echo $_SESSION["rut"]; ?>" class="form-control" maxlength="12" disabled/></td>
                                         <td> &nbsp; Telefono</td>
                                         <td><input type="text" name="txtTelefono" value="6034690" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Nombre</td>
-                                        <td><input type="text" name="txtNombre" value="<?php echo $_SESSION["nombre"];?>" class="form-control" disabled/></td>
+                                        <td><input type="text" name="txtNombre" value="<?php echo $_SESSION["nombre"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Email</td>
                                         <td><input type="email" name="txtEmail" value="nacho@gmail.com" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Paterno</td>
-                                        <td><input type="text" name="txtApPat" value="<?php echo $_SESSION["apellidoP"];?>" class="form-control" disabled/></td>
+                                        <td><input type="text" name="txtApPat" value="<?php echo $_SESSION["apellidoP"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp; Direccion</td>
                                         <td><input type="text" name="txtDireccion" value="loquesea#381" class="form-control" /></td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Apellido Materno</td>
-                                        <td><input type="text" name="txtApMat" value="<?php echo $_SESSION["apellidoM"];?>" class="form-control" disabled/></td>
+                                        <td><input type="text" name="txtApMat" value="<?php echo $_SESSION["apellidoM"]; ?>" class="form-control" disabled/></td>
                                         <td> &nbsp;&nbsp;Comuna</td>
                                         <td>
-                                            <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control"/>
+                                            <input type="text" name="txtComuna" id="txtComuna" value="Santiago" class="form-control" placeholder="Autcompletado Ajax"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -213,6 +224,7 @@ session_start();
                                             <select name="cmbEducacion" class="form-control">
                                                 <?php
                                                 $listaNivelEducacion = ListasPostulanteDaoImp::listarEducacion();
+                                                echo "<option>" . "Seleccionar" . "</option>";
                                                 foreach ($listaNivelEducacion as $value) {
                                                     echo "<option>" . $value . "</option>";
                                                 }
@@ -227,6 +239,8 @@ session_start();
                                             <select name="cmbSexo" class="form-control">
                                                 <?php
                                                 $listaSexo = ListasPostulanteDaoImp::listarSexo();
+                                                //Opción por default
+                                                echo "<option>" . "Seleccionar" . "</option>";
                                                 foreach ($listaSexo as $value) {
                                                     if ($value != "No Indica") {
                                                         echo "<option>" . $value . "</option>";
@@ -242,6 +256,7 @@ session_start();
                                             <select name="cmbRenta" class="form-control">
                                                 <?php
                                                 $listaRenta = ListasPostulanteDaoImp::listarRenta();
+                                                echo "<option>" . "Seleccionar" . "</option>";
                                                 foreach ($listaRenta as $value) {
                                                     echo "<option>" . $value . "</option>";
                                                 }
@@ -257,6 +272,7 @@ session_start();
                                             <select name="cmbEstadoCivil" class="form-control">
                                                 <?php
                                                 $listaEstadoCivil = ListasPostulanteDaoImp::listarEstadoCivil();
+                                                echo "<option>" . "Seleccionar" . "</option>";
                                                 foreach ($listaEstadoCivil as $value) {
                                                     echo "<option>" . $value . "</option>";
                                                 }
@@ -272,13 +288,13 @@ session_start();
                                         <td>&nbsp;Hijos</td>
                                         <td>
                                             <div>
-                                                &nbsp;<input type="checkbox" name="chkHijos" id="chkHijos" value="ON" style="float: left;">  
-                                                <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px; float: left; margin: auto "   value="2" disabled class="form-control"/>
+                                                &nbsp;<input type="checkbox" name="chkHijos" id="chkHijos" value="ON" style="display: inline-block;">  &nbsp;&nbsp;&nbsp;
+                                               <input name="txtHijos" id="txtHijos" min="0" type="number" style="width: 50px;   display: inline-block;"   value="2" disabled class="form-control"/>
                                             </div>
                                         </td>
                                         <td>&nbsp;&nbsp;Padece alguna enfermedad crónica</td>
                                         <td>
-                                            &nbsp; <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; Si
+                                            &nbsp; <input type="checkbox" name="chkEnfermedad" value="ON" />&nbsp; &nbsp; Si
                                         </td>
                                     </tr>
                                     </tbody>

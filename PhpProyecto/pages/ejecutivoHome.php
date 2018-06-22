@@ -159,14 +159,6 @@ if($_SESSION["perfil"]=='2'){
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <?php
-                            echo "Perfil " . $_SESSION["perfil"];
-                            if ($_SESSION["perfil"] == '2') {
-                                echo "perfil bien";
-                            } else {
-                                header('Location: ../pages/perfil1.php');
-                            }
-                            ?>
                         </div>
                     </div>
                 </div>

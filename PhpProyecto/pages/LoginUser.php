@@ -90,7 +90,7 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
                             </a>
                         </div>
                         <div class="text-center p-t-136">
-                            <a class="txt2" href="RegistrarUsuario.php">
+                            <a class="txt2"  data-toggle="modal" data-target="#exampleModal">
                                 registrar Cuenta
                                 <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                             </a>
@@ -122,6 +122,85 @@ if (session_status() == PHP_SESSION_DISABLED || session_status() == PHP_SESSION_
         </script>
         <!--===============================================================================================-->
         <script src="../assets/js/main.js"></script>
+
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" >Crear Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="../server/RegistrarUsuario.php" method="POST">
+
+                        <div class="modal-body">
+
+
+                            <?php
+                            if (isset($_SESSION["exito"])) {
+                                if ($_SESSION["exito"] == true) {
+                                    ?>
+                                    <script> alert('Se registró el usuario correctamente');</script>    
+                                <?php } else { ?>
+                                    <script> alert('No se registró el usuario');</script>    
+                                    <?php
+                                }
+                                unset($_SESSION["exito"]); //Se borra esta variable para que no despliegue la alerta cada vez que se quiera volver a esta página
+                            }
+                            ?>
+
+                            <table border="1" class="table-striped" style="width: 100%;" >
+                                <thead>
+                                    <tr>
+                                        <th colspan="2" style="text-align: center;">Formulario de Registro</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>&nbsp;Rut</td>
+                                        <td><input type="text" name="txtRut" id="txtRut" value="19.360.198-7" class="form-control"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Nombre</td>
+                                        <td><input type="text" name="txtNombre" value="juan" class="form-control"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Apellido Paterno</td>
+                                        <td><input type="text" name="txtApPaterno" value="lopez" class="form-control"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Apellido Materno</td>
+                                        <td><input type="text" name="txtApMaterno" value="garrido" class="form-control" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Contraseña</td>
+                                        <td><input type="text" name="txtContrasena" value="hola" class="form-control"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;Repetir Contraseña</td>
+                                        <td><input type="text" name="txtContrasena2" value="hola"  class="form-control"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+
+                            >
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
     </body>
 </html>

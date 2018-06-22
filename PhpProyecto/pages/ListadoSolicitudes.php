@@ -46,10 +46,9 @@ include_once '../dao/RentaDaoImpl.php';
         <title></title>
     </head>
     <body>
-        
+
         <?php
         $lista = SolicitudDaoImpl::listarSolicitudes();
-
         ?>
 
         <table border="1" >
@@ -64,7 +63,7 @@ include_once '../dao/RentaDaoImpl.php';
             <tbody>
                 <?php
                 foreach ($lista as $id) {
-                   
+
                     //Se lee el objeto postulante a partir del id para desplegar sus datos en el modal de detalle
                     $dtoPostulante = PostulanteDaoImpl::LeerObjeto($id->getIdPostulante());
 
@@ -179,7 +178,7 @@ include_once '../dao/RentaDaoImpl.php';
 
                                                         <label for="radio-1">Pendiente</label>
                                                         <input type="radio" name="radio-1" id="radio-1" value="2" >
-                                                        
+
                                                         <label for="radio-2">Aprobar</label>
                                                         <input type="radio" name="radio-1" id="radio-2" value="1">
                                                         <label for="radio-3">Rechazar</label>
@@ -208,28 +207,29 @@ include_once '../dao/RentaDaoImpl.php';
 
                             <script>
                                 $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').click(function () {
-                                    $.ajax({
-                                        data: {"idSolicitud": <?php echo $id->getIdSolicitud(); ?>},
-                                        method: "POST",
-                                        url: '../server/FPAEliminarSolicitud.php',
-                                        success: function () {
-                                            if (confirm("¿Realmente desea eliminar la solicitud?")) {
 
-                                                $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').closest('tr').fadeOut();
+
+                                    if (confirm("¿Realmente desea eliminar la solicitud?")) {
+
+                                        $('#btnEliminar<?php echo $id->getIdSolicitud(); ?>').closest('tr').fadeOut();
+
+                                        $.ajax({
+                                            data: {"idSolicitud": <?php echo $id->getIdSolicitud(); ?>},
+                                            method: "POST",
+                                            url: '../server/FPAEliminarSolicitud.php',
+                                            success: function () {
 
                                             }
-                                        }
-                                    });
+                                        });
 
+                                    }
                                 });
-
-
                             </script>
 
 
 
-                            
-                            
+
+
 
 
                         </td>

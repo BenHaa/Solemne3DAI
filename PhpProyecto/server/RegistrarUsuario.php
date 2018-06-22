@@ -34,12 +34,12 @@ if (PersonaDaoImpl::agregarObjeto($dtoPersona)) {
 
     if (UsuarioDaoImpl::agregarObjeto($dtoUsuario)) {
         $_SESSION["exito"] = true;
-        header('Location: ../pages/RegistrarUsuario.php');
+        header('Location: ../pages/LoginUser.php');
     } else {
         echo $dtoUsuario->__toString();
     }
 } else {
-    header('Location: ../pages/RegistrarUsuario.php');
+    header('Location: ../pages/LoginUser.php');
     $_SESSION["exito"] = false;
 }
 

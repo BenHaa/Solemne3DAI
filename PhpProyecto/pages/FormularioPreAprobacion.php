@@ -167,6 +167,7 @@ session_start();
                                         <p>Log out</p>
                                     </a>
                                 </li>
+                                
                                 <li class="separator hidden-lg"></li>
                             </ul>
                         </div>
@@ -218,7 +219,7 @@ session_start();
                                     </tr>
                                     <tr>
                                         <td>&nbsp;Fecha Nacimiento</td>
-                                        <td><input type="date" name="fechaNac" value="" class="form-control" /></td>
+                                        <td><input type="date" name="fechaNac" value="" class="form-control" required /></td>
                                         <td> &nbsp;&nbsp;Educacion</td>
                                         <td>
                                             <select name="cmbEducacion" class="form-control">

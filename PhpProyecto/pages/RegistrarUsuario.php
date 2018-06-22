@@ -58,7 +58,7 @@ session_start();
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="Loginv2.php" class="simple-text">
+                        <a href="LoginUser.php" class="simple-text">
                             INICIAR SESION
                         </a>
                     </div>

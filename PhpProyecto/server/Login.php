@@ -30,8 +30,12 @@ if (isset($_POST["txtRut"]) & isset($_POST["txtPassword"])) {
             }
         //header('Location: ../pages/dashboard.php');
     } else {
-        echo "<script> alert('Usuario o contraseña incorrectos'); </script>";
-        //header('Location: ../pages/Loginv2.php');
+            echo "<script> 
+        alert('Usuario o contraseña incorrectos');
+        window.location.replace('../pages/LoginUser.php');
+    </script>";
+
+
     }
 }
 

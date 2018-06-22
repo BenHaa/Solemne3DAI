@@ -2,5 +2,5 @@
 session_start();
 session_destroy();
 session_cache_expire();
-header('Location: ../pages/Loginv2.php');
+header('Location: ../pages/LoginUser.php');
 
